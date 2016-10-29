@@ -1,0 +1,27 @@
+mypage/questions/index
+<%= form_for([:mypage, @question]) do |f| %>
+  <%= f.text_field :title %><br>
+  <%= f.fields_for :scores do |qs_f| %>
+    <%= qs_f.select :party_id, Party.active.map { |party| [party.name, party.id] } %>
+    <%= qs_f.text_field :agree %>
+    <%= qs_f.text_field :neutral %>
+    <%= qs_f.text_field :opposition %>
+  <% end %><br>
+  <%= f.fields_for :scores do |qs_f| %>
+    <%= qs_f.select :party_id, Party.active.map { |party| [party.name, party.id] } %>
+    <%= qs_f.text_field :agree %>
+    <%= qs_f.text_field :neutral %>
+    <%= qs_f.text_field :opposition %>
+  <% end %><br>
+  <%= f.submit "Create Question" %>
+<% end %>
+<div>
+  <% @questions.each do |question| %>
+    <div>
+      <%= question.title %>
+      <% question.scores.each do |score| %>
+        <%= score.party.name %> <%= score.agree %> <%= score.neutral %> <%= score.opposition %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

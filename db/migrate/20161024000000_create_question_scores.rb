@@ -3,9 +3,9 @@ class CreateQuestionScores < ActiveRecord::Migration[5.0]
     create_table :question_scores do |t|
       t.references :question, null: false
       t.references :party, null: false
-      t.integer :score_agree, limit: 1, null: false
-      t.integer :score_neutral, limit: 1, null: false
-      t.integer :score_opposition, limit: 1, null: false
+      t.integer :agree, limit: 1, null: false
+      t.integer :neutral, limit: 1, null: false
+      t.integer :opposition, limit: 1, null: false
 
       t.timestamps
     end

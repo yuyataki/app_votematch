@@ -1,0 +1,9 @@
+question_sets/show
+<div>
+  <%= @question_set.inspect %>
+</div>
+<div>
+  <% @questions.each do |question| %>
+    <%= question.title %>
+  <% end %>
+</div>

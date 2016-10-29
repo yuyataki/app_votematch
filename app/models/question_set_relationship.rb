@@ -1,0 +1,2 @@
+class QuestionSetRelationship < ApplicationRecord
+end
