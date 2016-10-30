@@ -10,50 +10,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161023143644) do
+ActiveRecord::Schema.define(version: 20161028140304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "active_admin_comments", force: :cascade do |t|
-    t.string   "namespace"
-    t.text     "body"
-    t.string   "resource_id",   null: false
-    t.string   "resource_type", null: false
-    t.string   "author_type"
-    t.integer  "author_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
-    t.index ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
-    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
-  end
-
   create_table "parties", force: :cascade do |t|
     t.string   "name",           default: "未登録",        null: false
     t.integer  "status",         default: 1,            null: false
-    t.date     "established_on", default: '2016-10-23', null: false
+    t.date     "established_on", default: '2016-10-29', null: false
     t.date     "dissolved_on"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
   end
 
   create_table "question_scores", force: :cascade do |t|
-    t.integer  "question_id",                null: false
-    t.integer  "party_id",                   null: false
-    t.integer  "score_agree",      limit: 2, null: false
-    t.integer  "score_neutral",    limit: 2, null: false
-    t.integer  "score_opposition", limit: 2, null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.integer  "question_id",           null: false
+    t.integer  "party_id",              null: false
+    t.integer  "agree",       limit: 2, null: false
+    t.integer  "neutral",     limit: 2, null: false
+    t.integer  "opposition",  limit: 2, null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.index ["party_id"], name: "index_question_scores_on_party_id", using: :btree
     t.index ["question_id", "party_id"], name: "index_question_scores_on_question_id_and_party_id", unique: true, using: :btree
     t.index ["question_id"], name: "index_question_scores_on_question_id", using: :btree
   end
 
+  create_table "question_set_relationships", force: :cascade do |t|
+    t.integer  "question_set_id"
+    t.integer  "question_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["question_id"], name: "index_question_set_relationships_on_question_id", using: :btree
+    t.index ["question_set_id", "question_id"], name: "question_set_index", unique: true, using: :btree
+    t.index ["question_set_id"], name: "index_question_set_relationships_on_question_set_id", using: :btree
+  end
+
+  create_table "question_sets", force: :cascade do |t|
+    t.integer  "user_id",                          null: false
+    t.string   "title",                            null: false
+    t.integer  "status",     limit: 2, default: 0, null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.index ["user_id"], name: "index_question_sets_on_user_id", using: :btree
+  end
+
   create_table "questions", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "title"
+    t.integer  "user_id",    null: false
+    t.string   "title",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_questions_on_user_id", using: :btree
@@ -79,14 +84,12 @@ ActiveRecord::Schema.define(version: 20161023143644) do
     t.datetime "locked_at"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "username"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
   add_foreign_key "question_scores", "parties"
   add_foreign_key "question_scores", "questions"
+  add_foreign_key "question_sets", "users"
   add_foreign_key "questions", "users"
 end

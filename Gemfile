@@ -11,6 +11,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'slim-rails'
 gem 'draper', '>= 3.0.0.pre1'
+gem 'gon'
+gem 'bootstrap-sass'
 
 group :development, :test do
   gem 'byebug'
