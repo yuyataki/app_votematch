@@ -4,6 +4,13 @@ Rails.application.routes.draw do
   get 'pages/show'
 
   get 'mypage' => 'mypage#index'
+  namespace 'mypage' do
+    resources :question_sets
+    resources :questions do
+      resources :question_scores
+    end
+    post 'create_scores' => 'questions#create_scores'
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
