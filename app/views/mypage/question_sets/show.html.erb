@@ -1,29 +1,56 @@
-<%= form_for([:mypage, @question]) do |f| %>
-  <%= f.text_field :title %>
-  <% Party.active.each do |party| %>
-    <div id="j__party_<%= party.id %>">
-      <%= f.fields_for :scores do |qs_f| %>
-        <%= qs_f.select :party_id, Party.active.map { |party| [party.name, party.id] }, selected: party.id %>
-        <%= qs_f.text_field :agree,      size: 6, placeholder: '賛成度', class: "j__point_#{party.id}" %>
-        <%= qs_f.text_field :neutral,    size: 6, placeholder: '中立度', class: "j__point_#{party.id}" %>
-        <%= qs_f.text_field :opposition, size: 6, placeholder: '反対度', class: "j__point_#{party.id}" %>
+<div class="container  create-question">
+  <%= form_for([:mypage, @question]) do |f| %>
+    <table class="table">
+      <tr>
+        <td colspan="6">質問<%= f.text_field :title, class: 'question-create-title' %></td>
+      </tr>
+      <tr>
+        <th>政党</th>
+        <th>賛成度</th>
+        <th>中立度</th>
+        <th>反対度</th>
+        <th> </th>
+        <th class="point-alert"> </th>
+      </tr>
+      <% Party.active.each do |party| %>
+        <tr id="j__party_<%= party.id %>">
+          <%= f.fields_for :scores do |qs_f| %>
+            <td>
+              <%= qs_f.select :party_id, Party.active.map { |party| [party.name, party.id] }, selected: party.id %>
+            </td>
+            <td>
+              <%= qs_f.text_field :agree,      size: 6, placeholder: '賛成度', class: "j__point_#{party.id}" %>
+            </td>
+            <td>
+              <%= qs_f.text_field :neutral,    size: 6, placeholder: '中立度', class: "j__point_#{party.id}" %>
+            </td>
+            <td>
+              <%= qs_f.text_field :opposition, size: 6, placeholder: '反対度', class: "j__point_#{party.id}" %>
+            </td>
+          <% end %>
+          <td><i class="fa fa-times" aria-hidden="true"></i><span class="css-cancel" id="j__delete_<%= party.id %>">x</span></td>
+          <td><span id="j__alert_<%= party.id %>"></span></td>
+        </tr>
       <% end %>
-      <span id="j__delete_<%= party.id %>">x</span>
-      <span id="j__alert_<%= party.id %>"></span>
-    </div>
+    </table>
+    <%= f.submit "Create Question" %>
   <% end %>
-  <%= f.submit "Create Question" %>
-<% end %>
+</div>
 
-<div>
-  <% @questions.each do |question| %>
-    <div>
-      <%= question.title %>
+<div class="container">
+  <table class="table">
+    <% @questions.each do |question| %>
+      <tr>
+        <th colspan="4" class="question-title bg-primary"><%= question.title %></th>
+      </tr>
       <% question.scores.each do |score| %>
-        <div>
-          <%= score.party.name %> <%= score.agree %> <%= score.neutral %> <%= score.opposition %>
-        </div>
+        <tr>
+          <td><%= score.party.name %></td>
+          <td><%= score.agree %></td>
+          <td><%= score.neutral %></td>
+          <td><%= score.opposition %></td>
+        </tr>
       <% end %>
-    </div>
-  <% end %>
+    <% end %>
+  </table>
 </div>

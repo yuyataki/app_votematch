@@ -12,7 +12,6 @@ gem 'devise'
 gem 'slim-rails'
 gem 'draper', '>= 3.0.0.pre1'
 gem 'gon'
-gem 'bootstrap-sass'
 
 group :development, :test do
   gem 'byebug'
