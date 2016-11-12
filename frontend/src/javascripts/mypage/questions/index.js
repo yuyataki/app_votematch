@@ -6,7 +6,6 @@ import $ from 'jquery';
 function addQuestionScore() {
   for(let party_id of gon.parties) {
     $(`#j__delete_${party_id}`).click(function() {
-      console.log("AAAAAAAAA");
       $(`#j__party_${party_id}`).empty();
     });
     $(`.j__point_${party_id}`).change(function() {
@@ -28,6 +27,14 @@ function addQuestionScore() {
   }
 }
 
+function showQuestionScore() {
+  $('.j__show_question_score').click(function() {
+    console.log("BBBBBBB2");
+    $(this).next().slideToggle(300);
+  });
+}
+
 $(() => {
   addQuestionScore();
+  showQuestionScore();
 });

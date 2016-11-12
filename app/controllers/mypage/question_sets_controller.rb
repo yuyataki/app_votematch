@@ -6,9 +6,16 @@ class Mypage::QuestionSetsController < MypageController
 
   def show
     @question_set = current_user.question_sets.find(params[:id])
-    @question = Question.new
+
+    @question = @question_set.questions.new
     @question.scores.new
-    @questions = current_user.questions
+
+    @saved_questions = @question_set.saved_questions
+
     gon.parties = Party.active.pluck(:id)
+    gon.question_scores = @saved_questions.pluck(:id)
+  end
+
+  def add
   end
 end

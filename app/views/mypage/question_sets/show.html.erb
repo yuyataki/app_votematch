@@ -1,5 +1,7 @@
 <div class="container  create-question">
+  <h3>タイトル：<%= @question_set.title %></h3>
   <%= form_for([:mypage, @question]) do |f| %>
+    <%= f.hidden_field :question_set, value: @question_set.id %>
     <table class="table">
       <tr>
         <td colspan="6">質問<%= f.text_field :title, class: 'question-create-title' %></td>
@@ -9,7 +11,7 @@
         <th>賛成度</th>
         <th>中立度</th>
         <th>反対度</th>
-        <th> </th>
+        <th class="party-delete">削除</th>
         <th class="point-alert"> </th>
       </tr>
       <% Party.active.each do |party| %>
@@ -28,29 +30,39 @@
               <%= qs_f.text_field :opposition, size: 6, placeholder: '反対度', class: "j__point_#{party.id}" %>
             </td>
           <% end %>
-          <td><i class="fa fa-times" aria-hidden="true"></i><span class="css-cancel" id="j__delete_<%= party.id %>">x</span></td>
+          <td class="party-delete" style="text-align:center;">
+            <i class="fa fa-times" id="j__delete_<%= party.id %>" aria-hidden="true"></i>
+          </td>
           <td><span id="j__alert_<%= party.id %>"></span></td>
         </tr>
       <% end %>
     </table>
-    <%= f.submit "Create Question" %>
+    <%= f.submit "追加" %>
+  <% end %>
+
+  <div class="question-score-list">
+    <% @saved_questions.each do |question| %>
+      <div class="question-title bg-primary j__show_question_score">
+        <i class="fa fa-check-circle-o" aria-hidden="true"></i>　<%= question.title %>
+    </div>
+    <div class="accordion">
+      <table class="table">
+        <tr>
+          <td class="question-score">政党名</td>
+          <td class="question-score">賛成度</td>
+          <td class="question-score">中立度</td>
+          <td class="question-score">反対度</td>
+        </tr>
+        <% question.scores.each do |score| %>
+          <tr>
+            <td class="question-score"><%= score.party.name %></td>
+            <td class="question-score"><%= score.agree %></td>
+            <td class="question-score"><%= score.neutral %></td>
+            <td class="question-score"><%= score.opposition %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
   <% end %>
 </div>
-
-<div class="container">
-  <table class="table">
-    <% @questions.each do |question| %>
-      <tr>
-        <th colspan="4" class="question-title bg-primary"><%= question.title %></th>
-      </tr>
-      <% question.scores.each do |score| %>
-        <tr>
-          <td><%= score.party.name %></td>
-          <td><%= score.agree %></td>
-          <td><%= score.neutral %></td>
-          <td><%= score.opposition %></td>
-        </tr>
-      <% end %>
-    <% end %>
-  </table>
 </div>
