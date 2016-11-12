@@ -1,10 +1,27 @@
-mypage/index
-<div>
-  <% @question_sets.each do |question_set| %>
-    <div>
-      <%= link_to mypage_question_set_path(question_set) do %>
-        <%= question_set.title %> <%= question_set.created_at %>
+<div class="container">
+  <div>
+    <%= form_for([:mypage, @question_set]) do |f| %>
+      <div>タイトル：<%= f.text_field :title %><%= f.submit 'ボートマッチを作成する' %></div>
+    <% end %>
+  </div>
+  <table class="table">
+    <tr>
+      <td class="question-score">タイトル</td>
+      <td class="question-score">作成日時</td>
+      <td class="question-score">ステータス</td>
+      <td></td>
+    </tr>
+    <tr>
+    </tr>
+    <% @question_sets.each do |question_set| %>
+      <%= form_for([:mypage, question_set]) do |f| %>
+        <tr>
+          <td><%= link_to question_set.title, mypage_question_set_path(question_set) %></td>
+          <td><%= question_set.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+          <td><%= question_set.status %></td>
+          <td><%= f.submit '更新' %></td>
+        </tr>
       <% end %>
-    </div>
-  <% end %>
+    <% end %>
+  </table>
 </div>

@@ -29,7 +29,6 @@ function addQuestionScore() {
 
 function showQuestionScore() {
   $('.j__show_question_score').click(function() {
-    console.log("BBBBBBB2");
     $(this).next().slideToggle(300);
   });
 }

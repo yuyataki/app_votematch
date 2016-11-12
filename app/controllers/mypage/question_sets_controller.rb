@@ -1,9 +1,4 @@
 class Mypage::QuestionSetsController < MypageController
-  def index
-    @question_set = QuestionSet.new
-    @question_sets = current_user.question_sets
-  end
-
   def show
     @question_set = current_user.question_sets.find(params[:id])
 
@@ -16,6 +11,14 @@ class Mypage::QuestionSetsController < MypageController
     gon.question_scores = @saved_questions.pluck(:id)
   end
 
-  def add
+  def create
+    question_set = current_user.question_sets.create!(question_set_params)
+    redirect_to mypage_question_set_path(question_set)
+  end
+
+  private
+
+  def question_set_params
+    params.require(:question_set).permit(:user, :title)
   end
 end

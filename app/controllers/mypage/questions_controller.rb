@@ -7,6 +7,7 @@ class Mypage::QuestionsController < MypageController
   end
 
   def show
+    @question = Question.find(params[:id])
   end
 
   def create
@@ -15,11 +16,17 @@ class Mypage::QuestionsController < MypageController
     redirect_to mypage_question_set_path(question_set)
   end
 
+  def update
+    @question = Question.find(params[:id])
+    @question.update_attributes(question_params)
+    redirect_to :back
+  end
+
   private
 
   def question_params
     params.require(:question).permit(
-      :user, :title, scores_attributes: [:party_id, :agree, :neutral, :opposition]
+      :user, :title, scores_attributes: [:id, :party_id, :agree, :neutral, :opposition]
     )
   end
 end

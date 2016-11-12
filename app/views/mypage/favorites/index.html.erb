@@ -1,0 +1,16 @@
+<div class="container">
+    <table class="table">
+      <tr>
+        <td class="question-score">タイトル</td>
+        <td class="question-score">ユーザー</td>
+        <td></td>
+      </tr>
+      <% @favorite_sets.each do |favorite_set| %>
+        <tr>
+          <td><%= favorite_set.title %></td>
+          <td><%= favorite_set.user_id %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -6,4 +6,6 @@ class User < ApplicationRecord
 #         :confirmable, :lockable, :timeoutable
   has_many :question_sets
   has_many :questions
+  has_many :favorites
+  has_many :favorite_sets, through: :favorites, source: :question_set
 end

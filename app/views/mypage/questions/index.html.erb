@@ -1,39 +1,19 @@
 <div class="container">
-  <%= form_for([:mypage, @question]) do |f| %>
-    <table class="table">
+  <h3>質問一覧</h3>
+  <table class="table">
+    <tr>
+      <th>質問名</th>
+      <th>使われているボートマッチ</th>
+    </tr>
+    <% @questions.each do |question| %>
       <tr>
-        <td><%= f.text_field :title %></td>
+        <td><%= link_to question.title, mypage_question_path(question) %></td>
+        <td>
+          <% question.question_sets.each do |set| %>
+            <div><%= link_to set.title, mypage_question_set_path(set) %></div>
+          <% end %>
+        </td>
       </tr>
-      <% Party.active.each do |party| %>
-        <tr>
-          <td>
-            <div id="j__party_<%= party.id %>">
-              <%= f.fields_for :scores do |qs_f| %>
-                <%= qs_f.select :party_id, Party.active.map { |party| [party.name, party.id] }, selected: party.id %>
-                <%= qs_f.text_field :agree,      size: 6, placeholder: '賛成度', class: "j__point_#{party.id}" %>
-                <%= qs_f.text_field :neutral,    size: 6, placeholder: '中立度', class: "j__point_#{party.id}" %>
-                <%= qs_f.text_field :opposition, size: 6, placeholder: '反対度', class: "j__point_#{party.id}" %>
-              <% end %>
-              <span id="j__delete_<%= party.id %>">x</span>
-              <span id="j__alert_<%= party.id %>"></span>
-            </div>
-          </td>
-        </tr>
-      <% end %>
-    </table>
-    <%= f.submit "Create Question" %>
-  <% end %>
-</div>
-
-<div>
-  <% @questions.each do |question| %>
-    <div>
-      <%= question.title %>
-      <% question.scores.each do |score| %>
-        <div>
-          <%= score.party.name %> <%= score.agree %> <%= score.neutral %> <%= score.opposition %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
+    <% end %>
+  </table>
 </div>

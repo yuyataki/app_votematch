@@ -21,13 +21,13 @@
               <%= qs_f.select :party_id, Party.active.map { |party| [party.name, party.id] }, selected: party.id %>
             </td>
             <td>
-              <%= qs_f.text_field :agree,      size: 6, placeholder: '賛成度', class: "j__point_#{party.id}" %>
+              <%= qs_f.select :agree, QuestionScore::SCORES, { include_blank: true }, class: "j__point_#{party.id}" %>
             </td>
             <td>
-              <%= qs_f.text_field :neutral,    size: 6, placeholder: '中立度', class: "j__point_#{party.id}" %>
+              <%= qs_f.select :neutral, QuestionScore::SCORES, { include_blank: true }, class: "j__point_#{party.id}" %>
             </td>
             <td>
-              <%= qs_f.text_field :opposition, size: 6, placeholder: '反対度', class: "j__point_#{party.id}" %>
+              <%= qs_f.select :opposition, QuestionScore::SCORES, { include_blank: true }, class: "j__point_#{party.id}" %>
             </td>
           <% end %>
           <td class="party-delete" style="text-align:center;">
@@ -44,7 +44,8 @@
     <% @saved_questions.each do |question| %>
       <div class="question-title bg-primary j__show_question_score">
         <i class="fa fa-check-circle-o" aria-hidden="true"></i>　<%= question.title %>
-    </div>
+        <span><%= link_to '編集', mypage_question_path(question) %></span>
+      </div>
     <div class="accordion">
       <table class="table">
         <tr>
@@ -64,5 +65,4 @@
       </table>
     </div>
   <% end %>
-</div>
 </div>

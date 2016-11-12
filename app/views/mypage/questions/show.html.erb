@@ -1,1 +1,30 @@
-mypage/questions/show
+<div class="container">
+  <%= form_for([:mypage, @question]) do |f| %>
+    <div class="question-score-list">
+      <div class="question-title">
+        質問：<%= f.text_field :title, class: 'question-create-title' %>
+    </div>
+    <div>
+      <table class="table">
+        <tr>
+          <td class="question-score">政党名</td>
+          <td class="question-score">賛成度</td>
+          <td class="question-score">中立度</td>
+          <td class="question-score">反対度</td>
+          <th class="point-alert"> </th>
+        </tr>
+        <%= f.fields_for :scores do |qs_f| %>
+          <%= qs_f.hidden_field :party_id, value: qs_f.object.party_id %>
+          <tr>
+            <td class="question-score"><%= qs_f.object.party.name %></td>
+            <td class="question-score"><%= qs_f.select :agree, QuestionScore::SCORES %></td>
+            <td class="question-score"><%= qs_f.select :neutral, QuestionScore::SCORES %></td>
+            <td class="question-score"><%= qs_f.select :opposition, QuestionScore::SCORES %></td>
+            <td><span id="j__alert_<%= qs_f.object.party_id %>"></span></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+    <%= f.submit '更新' %>
+  <% end %>
+</div>

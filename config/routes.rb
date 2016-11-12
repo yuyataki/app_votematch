@@ -5,10 +5,11 @@ Rails.application.routes.draw do
 
   get 'mypage' => 'mypage#index'
   namespace 'mypage' do
-    resources :question_sets
+    resources :question_sets, only: %i(create show)
     resources :questions do
       resources :question_scores
     end
+    resources :favorites, only: :index
     post 'create_scores' => 'questions#create_scores'
   end
 

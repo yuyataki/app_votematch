@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028140304) do
+ActiveRecord::Schema.define(version: 20161112000000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "user_id",         null: false
+    t.integer  "question_set_id", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["question_set_id"], name: "index_favorites_on_question_set_id", using: :btree
+    t.index ["user_id", "question_set_id"], name: "index_favorites_on_user_id_and_question_set_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_favorites_on_user_id", using: :btree
+  end
 
   create_table "parties", force: :cascade do |t|
     t.string   "name",           default: "未登録",        null: false

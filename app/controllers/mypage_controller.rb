@@ -2,6 +2,7 @@ class MypageController < ApplicationController
   before_action :redirect_to_root
 
   def index
+    @question_set = QuestionSet.new
     @question_sets = current_user.question_sets
   end
 
