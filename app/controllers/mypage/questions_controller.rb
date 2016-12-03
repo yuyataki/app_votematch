@@ -8,6 +8,7 @@ class Mypage::QuestionsController < MypageController
 
   def show
     @question = Question.find(params[:id])
+    gon.parties = @question.scores.pluck(:party_id)
   end
 
   def create

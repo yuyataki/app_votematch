@@ -4,7 +4,14 @@
     <%= f.hidden_field :question_set, value: @question_set.id %>
     <table class="table">
       <tr>
-        <td colspan="6">質問<%= f.text_field :title, class: 'question-create-title' %></td>
+        <div class="question-score-list-show">
+          <div class="question-title clearfix">
+            <div class="question">質問</div>
+            <div class="question-field">
+              <%= f.text_field :title, class: 'question-create-title' %>
+            </div>
+          </div>
+        </div>
       </tr>
       <tr>
         <th>政党</th>
@@ -37,32 +44,38 @@
         </tr>
       <% end %>
     </table>
-    <%= f.submit "追加" %>
+    <div class="submit"><%= f.submit '追加', class: 'submit-button' %></div>
   <% end %>
 
   <div class="question-score-list">
     <% @saved_questions.each do |question| %>
-      <div class="question-title bg-primary j__show_question_score">
-        <i class="fa fa-check-circle-o" aria-hidden="true"></i>　<%= question.title %>
-        <span><%= link_to '編集', mypage_question_path(question) %></span>
+      <div class="question-title j__show_question_score">
+        <i class="fa fa-caret-square-o-down dropdown-icon j__accordion_change"
+           aria-hidden="true"></i><%= question.title %>
       </div>
-    <div class="accordion">
-      <table class="table">
-        <tr>
-          <td class="question-score">政党名</td>
-          <td class="question-score">賛成度</td>
-          <td class="question-score">中立度</td>
-          <td class="question-score">反対度</td>
-        </tr>
-        <% question.scores.each do |score| %>
+      <div class="accordion">
+        <table class="table">
           <tr>
-            <td class="question-score"><%= score.party.name %></td>
-            <td class="question-score"><%= score.agree %></td>
-            <td class="question-score"><%= score.neutral %></td>
-            <td class="question-score"><%= score.opposition %></td>
+            <td class="question-score">政党名</td>
+            <td class="question-score">賛成度</td>
+            <td class="question-score">中立度</td>
+            <td class="question-score">反対度</td>
           </tr>
-        <% end %>
-      </table>
-    </div>
-  <% end %>
+          <% question.scores.each do |score| %>
+            <tr>
+              <td class="question-score"><%= score.party.name %></td>
+              <td class="question-score"><%= score.agree %></td>
+              <td class="question-score"><%= score.neutral %></td>
+              <td class="question-score"><%= score.opposition %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <td colspan="4" class="edit-row">
+              <%= link_to '編集', mypage_question_path(question), class: 'question-edit' %>
+            </td>
+          </tr>
+        </table>
+      </div>
+    <% end %>
+  </div>
 </div>

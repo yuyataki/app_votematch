@@ -1,10 +1,12 @@
 <div class="container">
   <%= form_for([:mypage, @question]) do |f| %>
-    <div class="question-score-list">
-      <div class="question-title">
-        質問：<%= f.text_field :title, class: 'question-create-title' %>
-    </div>
-    <div>
+    <div class="question-score-list-show">
+      <div class="question-title clearfix">
+        <div class="question">質問</div>
+        <div class="question-field">
+          <%= f.text_field :title, class: 'question-create-title' %>
+        </div>
+      </div>
       <table class="table">
         <tr>
           <td class="question-score">政党名</td>
@@ -15,16 +17,23 @@
         </tr>
         <%= f.fields_for :scores do |qs_f| %>
           <%= qs_f.hidden_field :party_id, value: qs_f.object.party_id %>
+          <% party = qs_f.object.party %>
           <tr>
-            <td class="question-score"><%= qs_f.object.party.name %></td>
-            <td class="question-score"><%= qs_f.select :agree, QuestionScore::SCORES %></td>
-            <td class="question-score"><%= qs_f.select :neutral, QuestionScore::SCORES %></td>
-            <td class="question-score"><%= qs_f.select :opposition, QuestionScore::SCORES %></td>
-            <td><span id="j__alert_<%= qs_f.object.party_id %>"></span></td>
+            <td class="question-score"><%= party.name %></td>
+            <td class="question-score">
+              <%= qs_f.select :agree, QuestionScore::SCORES, { include_blank: true }, class: "j__point_#{party.id}" %>
+            </td>
+            <td class="question-score">
+              <%= qs_f.select :neutral, QuestionScore::SCORES, { include_blank: true }, class: "j__point_#{party.id}" %>
+            </td>
+            <td class="question-score">
+              <%= qs_f.select :opposition, QuestionScore::SCORES, { include_blank: true }, class: "j__point_#{party.id}" %>
+            </td>
+            <td><span id="j__alert_<%= qs_f.object.party_id %>" class="point-alert"></span></td>
           </tr>
         <% end %>
       </table>
     </div>
-    <%= f.submit '更新' %>
+    <div class="submit"><%= f.submit '更新', class: 'submit-button' %></div>
   <% end %>
 </div>

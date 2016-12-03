@@ -8,7 +8,6 @@ class Mypage::QuestionSetsController < MypageController
     @saved_questions = @question_set.saved_questions
 
     gon.parties = Party.active.pluck(:id)
-    gon.question_scores = @saved_questions.pluck(:id)
   end
 
   def create

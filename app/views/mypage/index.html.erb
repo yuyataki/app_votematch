@@ -1,7 +1,15 @@
 <div class="container">
   <div>
     <%= form_for([:mypage, @question_set]) do |f| %>
-      <div>タイトル：<%= f.text_field :title %><%= f.submit 'ボートマッチを作成する' %></div>
+      <div class="question-score-list-show">
+        <div class="question-title clearfix">
+          <div class="question">タイトル</div>
+          <div class="question-field">
+            <%= f.text_field :title, class: 'question-create-title' %>
+          </div>
+          <div class="submit votematch-submit"><%= f.submit 'ボートマッチを作成する', class: 'submit-button' %></div>
+        </div>
+      </div>
     <% end %>
   </div>
   <table class="table">

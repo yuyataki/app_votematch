@@ -1,6 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Remarkable from 'remarkable';
 import $ from 'jquery';
 
 function addQuestionScore() {
@@ -29,7 +26,8 @@ function addQuestionScore() {
 
 function showQuestionScore() {
   $('.j__show_question_score').click(function() {
-    $(this).next().slideToggle(300);
+    $(this).next('.accordion').slideToggle(300);
+    $('.j__accordion_change', this).toggleClass('fa-caret-square-o-down fa-caret-square-o-up');
   });
 }
 
