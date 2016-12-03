@@ -2,3 +2,4 @@
 *.log
 tmp/*
 *.swp
+/frontend/node_modules
