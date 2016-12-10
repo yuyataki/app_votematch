@@ -13,6 +13,7 @@ gem 'slim-rails'
 gem 'draper', '>= 3.0.0.pre1'
 gem 'gon'
 gem 'unicorn'
+gem 'activerecord-import'
 
 group :development, :test do
   gem 'byebug'

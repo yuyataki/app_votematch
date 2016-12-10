@@ -11,6 +11,6 @@ class QuestionSet < ApplicationRecord
   end
 
   def saved_questions
-    questions.select { |q| q.persisted? }
+    questions.select(&:persisted?)
   end
 end

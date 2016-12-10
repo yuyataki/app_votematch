@@ -62,4 +62,11 @@ Metrics/AbcSize:
 
 # Prefer double_quotes strings unless your string literal contains escape chars
 StringLiterals:
-  EnforcedStyle: double_quotes
+  EnforcedStyle: single_quotes
+
+# Put a comma after the last item of a multiline array or hash
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: comma
+
+AsciiComments:
+  Enabled: false

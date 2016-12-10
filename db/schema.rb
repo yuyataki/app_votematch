@@ -26,12 +26,15 @@ ActiveRecord::Schema.define(version: 20161112000000) do
   end
 
   create_table "parties", force: :cascade do |t|
-    t.string   "name",           default: "未登録",        null: false
-    t.integer  "status",         default: 1,            null: false
-    t.date     "established_on", default: '2016-10-29', null: false
-    t.date     "dissolved_on"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.string   "name",                                               null: false
+    t.string   "official_name",                                      null: false
+    t.integer  "action",            limit: 2, default: 0,            null: false
+    t.date     "acted_on",                                           null: false
+    t.date     "ended_on",                    default: '9999-12-31', null: false
+    t.integer  "previous_party_id",           default: 0,            null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.index ["name", "acted_on"], name: "index_parties_on_name_and_acted_on", unique: true, using: :btree
   end
 
   create_table "question_scores", force: :cascade do |t|
