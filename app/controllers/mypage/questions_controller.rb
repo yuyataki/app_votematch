@@ -3,7 +3,7 @@ class Mypage::QuestionsController < MypageController
     @question = Question.new
     @question.scores.new
     @questions = current_user.questions
-    gon.parties = Party.active.pluck(:id)
+    gon.parties = Party.active(Time.zone.now).pluck(:id)
   end
 
   def show

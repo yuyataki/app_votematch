@@ -7,7 +7,7 @@ class Mypage::QuestionSetsController < MypageController
 
     @saved_questions = @question_set.saved_questions
 
-    gon.parties = Party.active.pluck(:id)
+    gon.parties = Party.active(Time.zone.now).pluck(:id)
   end
 
   def create

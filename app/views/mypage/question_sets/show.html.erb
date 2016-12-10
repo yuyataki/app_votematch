@@ -21,11 +21,12 @@
         <th class="party-delete">削除</th>
         <th class="point-alert"> </th>
       </tr>
-      <% Party.active.each do |party| %>
+      <% parties = Party.active(Time.zone.now) %>
+      <% parties.each do |party| %>
         <tr id="j__party_<%= party.id %>">
           <%= f.fields_for :scores do |qs_f| %>
             <td>
-              <%= qs_f.select :party_id, Party.active.map { |party| [party.name, party.id] }, selected: party.id %>
+              <%= qs_f.select :party_id, parties.map { |party| [party.name, party.id] }, selected: party.id %>
             </td>
             <td>
               <%= qs_f.select :agree, QuestionScore::SCORES, { include_blank: true }, class: "j__point_#{party.id}" %>
