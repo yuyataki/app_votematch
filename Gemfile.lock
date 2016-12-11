@@ -69,6 +69,8 @@ GEM
       capybara (>= 2.3.0, < 2.8.0)
       json
     choice (0.2.0)
+    codeclimate-test-reporter (1.0.3)
+      simplecov
     codecov (0.1.9)
       json
       simplecov
@@ -330,6 +332,7 @@ DEPENDENCIES
   byebug
   capybara
   capybara-webkit
+  codeclimate-test-reporter
   codecov
   coffee-rails (~> 4.1.0)
   database_cleaner
