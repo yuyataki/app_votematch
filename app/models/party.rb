@@ -12,7 +12,7 @@ class Party < ApplicationRecord
   }
 
   scope :active, ->(time) {
-    found.or(rename).where(
+    found.or(rename).or(acquire_party_condition).where(
       acted_on: Time.zone.local(0)..time, ended_on: time..Time.zone.local(9999, 12, 31)
     )
   }
