@@ -1,0 +1,19 @@
+<h1 class="question-set-title"><%= @question_set.title %></h1>
+<% @question_set.questions.each do |question| %>
+  <div class="question-content clearfix">
+    <div class="question-title-show">
+      <div class="question-title-style">
+        <%= question.title %>
+      </div>
+    </div>
+    <div class="question-agree question-choices j__question_agree_<%= question.id %>">
+      賛成
+    </div>
+    <div class="question-neutral question-choices j__question_neutral_<%= question.id %>">
+      中立
+    </div>
+    <div class="question-opposition question-choices j__question_opposition_<%= question.id %>">
+      反対
+    </div>
+  </div>
+<% end %>
