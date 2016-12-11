@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get 'pages/show'
 
   get 'mypage' => 'mypage#index'
+
+  resources :question_sets, only: :show
+
   namespace 'mypage' do
     resources :question_sets, only: %i(create show)
     resources :questions do
