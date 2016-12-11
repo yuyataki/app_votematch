@@ -4,3 +4,4 @@ tmp/*
 *.swp
 /frontend/node_modules
 /.bundle
+/coverage

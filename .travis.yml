@@ -6,6 +6,9 @@ services:
  - postgresql
 bundler_args: '--without development --deployment'
 cache: bundler
+env:
+  global:
+    - secure: 'JQ/G+5cP+qvguX8FcV2WaffKavScN860iJzzxdNucuTEWDH0IqzuaK/ifFtYC2auKIQfG0HJTFaQjeuvKz9slYzmneePFndWuvxdG08D8glo+ctdZiKsjtlqHgXQJ5JAcLxLcvqkJYNGZTL0zsRCmeD9wmh9eBqW2xJV1iYJvlLHenkqpJiw2fIHWLiIJHh7niZiDIu2Lpul8NKEKtN49VLu08+g5fiR6pFNioXU68yBtIMNBbXhoCP2yr9z3W1fZyDXhK0Q0k1DLiFrnA+/JiLrC8UgsIJhWz24cZJZTUgW9odkYyrP2VfVFETz1cUAtcLeITgsk+NtIOvcsyw3tsedx14hrOjm9Mfs9GAq30qIJsBoRpE6htVa+spFuyWJyFE3rzh+7HUE2CYVETyIuEL6yaokzkXlXvcDFBBla83ObDE1geQUfHEcO3OzMSxjuGX/GCn7jave01zpg/rmFSqlnNoyZYMoTVphq+fBsMu7mr585oGj8vYqMA7J70r/fSWOM3a7qyXri26YbrFzbly2O3+bzZWCKjQ2gD7dreHS0VJgjic8eswkxLjNZofAmv5pEqu1FFYPO/7CTO/g/fYmojyoWiWoSwaqL4Fgjcb5NYb29V8mHTQJhVqoyCV8+AVub9aYf5ZSb9rDJvwivtwFlhDGCc//JUWPrVNT8OM='
 before_script:
   - cp config/database.travis.yml config/database.yml
   - bundle exec rake db:create

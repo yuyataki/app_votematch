@@ -18,23 +18,17 @@ gem 'gon'
 gem 'unicorn'
 gem 'activerecord-import'
 
-group :development, :test do
-  gem 'byebug'
-end
-
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'better_errors'
   gem 'binding_of_caller'
-end
-
-
-group :development do
   gem 'html2slim'
+  gem 'travis'
 end
 
 group :development, :test do
+  gem 'byebug'
   gem 'pry-coolline'
   gem 'pry-rails'
   gem 'pry-byebug'
@@ -53,4 +47,6 @@ group :test do
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'database_cleaner'
+  gem 'simplecov'
+  gem 'codecov', require: false
 end
