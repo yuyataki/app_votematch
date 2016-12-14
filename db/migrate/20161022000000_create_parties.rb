@@ -10,6 +10,6 @@ class CreateParties < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-    add_index :parties, [:name, :acted_on], unique: true
+    add_index :parties, [:official_name, :acted_on], unique: true
   end
 end

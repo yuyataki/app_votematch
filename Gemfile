@@ -33,6 +33,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
+  gem 'rb-readline'
   gem 'awesome_print'
   gem 'hirb'
   gem 'hirb-unicode'

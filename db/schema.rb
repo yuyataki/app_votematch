@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20161112000000) do
     t.integer  "previous_party_id",           default: 0,            null: false
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
-    t.index ["name", "acted_on"], name: "index_parties_on_name_and_acted_on", unique: true, using: :btree
+    t.index ["official_name", "acted_on"], name: "index_parties_on_official_name_and_acted_on", unique: true, using: :btree
   end
 
   create_table "question_scores", force: :cascade do |t|
