@@ -44,6 +44,7 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'rspec-its'
+  gem 'rails-controller-testing', require: false
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'capybara-webkit'

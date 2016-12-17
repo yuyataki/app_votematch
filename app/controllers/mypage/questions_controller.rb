@@ -7,20 +7,22 @@ class Mypage::QuestionsController < MypageController
   end
 
   def show
-    @question = Question.find(params[:id])
+    @question = current_user.questions.find(params[:id])
     gon.parties = @question.scores.pluck(:party_id)
+  rescue
+    redirect_to mypage_path
   end
 
   def create
-    question_set = QuestionSet.find(params[:question][:question_set])
+    question_set = current_user.question_sets.find(params[:question][:question_set])
     question_set.add_question(question_params)
     redirect_to mypage_question_set_path(question_set)
   end
 
   def update
     @question = Question.find(params[:id])
-    @question.update_attributes(question_params)
-    redirect_to :back
+    @question.update_attributes!(question_params)
+    render 'show'
   end
 
   private

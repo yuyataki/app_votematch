@@ -5,9 +5,11 @@ class Mypage::QuestionSetsController < MypageController
     @question = @question_set.questions.new
     @question.scores.new
 
-    @saved_questions = @question_set.saved_questions
+    @parties = Party.active(Time.zone.now)
 
     gon.parties = Party.active(Time.zone.now).pluck(:id)
+  rescue
+    redirect_to mypage_path
   end
 
   def create

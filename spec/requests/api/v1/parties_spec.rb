@@ -11,11 +11,8 @@ RSpec.describe 'parties', type: :request do
         expect(response.status).to eq 200
         expect(json['date']).to eq '2015-11-21'
         expect(json['parties']).to contain_exactly(
-          'おおさか維新の会', '公明党',
-          '新党改革',         '日本を元気にする会',
-          '日本共産党',       '次世代の党',
-          '民主党',           '生活の党と山本太郎となかまたち',
-          '社会民主党',       '維新の党',
+          'おおさか維新の会', '公明党', '新党改革', '日本を元気にする会', '日本共産党',
+          '次世代の党', '民主党', '生活の党と山本太郎となかまたち', '社会民主党', '維新の党',
           '自由民主党'
         )
       end
