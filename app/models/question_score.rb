@@ -3,4 +3,6 @@ class QuestionScore < ApplicationRecord
 
   belongs_to :question
   belongs_to :party
+
+  scope :of_question, ->(question) { where(question: question) }
 end

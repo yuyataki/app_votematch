@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe Mypage::QuestionSetsController, type: :controller do
   include_context 'mypage login'
 

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe 'parties', type: :request do
   describe 'GET /api/v1/pqrties.json' do

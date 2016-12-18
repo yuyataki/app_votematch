@@ -1,5 +1,5 @@
 class Party < ApplicationRecord
-  has_many :question_scores
+  has_many :scores, class_name: 'QuestionScore', dependent: :destroy
   belongs_to :previous_party, class_name: 'Party', foreign_key: :previous_party_id
 
   enum action: {

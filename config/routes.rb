@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'mypage' => 'mypage#index'
 
   resources :question_sets, only: :show
+  post 'question_sets/:id/yourresult' => 'question_sets#yourresult'
 
   namespace 'mypage' do
     resources :question_sets, only: %i(create show)
