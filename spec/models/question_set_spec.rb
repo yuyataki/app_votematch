@@ -17,12 +17,12 @@ RSpec.describe QuestionSet, type: :model do
     let(:choice_params) {
       { question1.id => 'agree', question2.id => 'opposition'}.stringify_keys
     }
-    subject { question_set.result(choice_params) }
+    subject { question_set.results(choice_params) }
 
     let(:expectation) {
       [
-        { party: leberal_democratic, total: 6 },
-        { party: communist, total: 10 },
+        { party: leberal_democratic, total: 6, max_point: 9 },
+        { party: communist, total: 10, max_point: 10 },
       ]
     }
     it { is_expected.to contain_exactly(*expectation) }

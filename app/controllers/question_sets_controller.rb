@@ -6,7 +6,7 @@ class QuestionSetsController < ApplicationController
 
   def yourresult
     @question_set = QuestionSet.find(params[:id])
-    @yourresult = @question_set.result(params[:choice])
-    redirect_to :back
+    @your_results = @question_set.results(params[:choice])
+    gon.parties_points = @your_results.map { |r| [r[:party].id, r[:total]] }
   end
 end

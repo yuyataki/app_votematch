@@ -1,0 +1,12 @@
+<div class="yourresult-content">
+  <% @your_results.each do |result| %>
+    <div class="each-party-yourresult clearfix">
+      <div class="party-name"><%= result[:party].name  %></div>
+      <div class="party-point">
+        <div class="point-bar j__party_<%= result[:party].id %>">
+          <%= number_to_percentage(100 * result[:total].to_f / result[:max_point].to_f, precision: 0) %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -10,13 +10,14 @@ class QuestionSet < ApplicationRecord
     save
   end
 
-  def result(choice_params)
+  def results(choice_params)
     Party.joins(:scores).includes(:scores).merge(
       QuestionScore.of_question(questions)
     ).map do |party|
       {
         party: party,
         total: party.scores.reduce(0) { |sum, s| sum + s.send(choice_params[s.question_id.to_s]) },
+        max_point: party.scores.reduce(0) { |sum, s| sum + s.max_point },
       }
     end
   end

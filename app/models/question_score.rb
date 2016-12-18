@@ -5,4 +5,8 @@ class QuestionScore < ApplicationRecord
   belongs_to :party
 
   scope :of_question, ->(question) { where(question: question) }
+
+  def max_point
+    [agree, neutral, opposition].max
+  end
 end
