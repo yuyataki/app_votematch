@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.feature 'show /question_set/:id', type: :feature do
-    given(:user) { create(:user) }
     given!(:question_set) { create(:question_set) }
     given!(:question1) { create(:question, :with_scores, question_sets: [question_set]) }
     given!(:question2) { create(:question, :with_scores, question_sets: [question_set]) }
