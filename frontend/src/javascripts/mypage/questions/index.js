@@ -1,10 +1,7 @@
 import $ from 'jquery';
 
 function addQuestionScore() {
-  for(let party_id of gon.parties) {
-    $(`#j__delete_${party_id}`).click(function() {
-      $(`#j__party_${party_id}`).empty();
-    });
+  for(let party_id of gon.parties || []) {
     $(`.j__point_${party_id}`).change(function() {
       let points = [];
       $(`.j__point_${party_id}`).each(function(i, element) {
@@ -15,13 +12,20 @@ function addQuestionScore() {
       let pointTotal = points.reduce(function(previous, current) {
         return previous + current
       });
+      let alertArea = $(this).parent().parent().children('td:last-child').children('span');
       if(points.length === 3 && pointTotal !== 10) {
-        $(`#j__alert_${party_id}`).text('ポイントの合計は10にしてください。');
+        alertArea.text('ポイントの合計は10にしてください。');
       } else {
-        $(`#j__alert_${party_id}`).empty();
+        alertArea.empty();
       }
     });
   }
+}
+
+function removeParty() {
+  $('.j__delete_party').click(function() {
+    $(this).parent().parent().empty();
+  });
 }
 
 function showQuestionScore() {
@@ -32,6 +36,7 @@ function showQuestionScore() {
 }
 
 $(() => {
+  removeParty();
   addQuestionScore();
   showQuestionScore();
 });

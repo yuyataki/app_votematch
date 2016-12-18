@@ -1,7 +1,7 @@
 <h1 class="question-set-title"><%= @question_set.title %></h1>
 <%= form_tag("/question_sets/#{@question_set.id}/yourresult") do %>
   <% @question_set.questions.each do |question| %>
-    <div class="question-content clearfix" id="<%= question.id %>">
+    <div class="question-content clearfix feature_<%= question.id %>" id="<%= question.id %>">
       <div class="question-title-show">
         <div class="question-title-style">
           <%= question.title %>
