@@ -1,35 +1,35 @@
 import $ from 'jquery';
 
 function clickQuestionAgree() {
-  for(let question_id of gon.question_ids) {
-    $(`.j__question_agree_${question_id}`).click(function() {
-      $(`.j__question_agree_${question_id}`).toggleClass('question-agree-click', 500);
-      $(`.j__question_neutral_${question_id}`).removeClass('question-neutral-click', 500);
-      $(`.j__question_opposition_${question_id}`).removeClass('question-opposition-click', 500);
-      $(`#question_${question_id}`).remove();
-      $("<input>", {
-        type: 'hidden', id: `question_${question_id}`, name: `choice[${question_id}]`, value: 'agree'
-      }).appendTo(`.j__question_agree_${question_id}`);
-    });
-    $(`.j__question_neutral_${question_id}`).click(function() {
-      $(`.j__question_agree_${question_id}`).removeClass('question-agree-click', 500);
-      $(`.j__question_neutral_${question_id}`).toggleClass('question-neutral-click', 500);
-      $(`.j__question_opposition_${question_id}`).removeClass('question-opposition-click', 500);
-      $(`#question_${question_id}`).remove();
-      $("<input>", {
-        type: 'hidden', id: `question_${question_id}`, name: `choice[${question_id}]`, value: 'neutral'
-      }).appendTo(`.j__question_neutral_${question_id}`);
-    });
-    $(`.j__question_opposition_${question_id}`).click(function() {
-      $(`.j__question_agree_${question_id}`).removeClass('question-agree-click', 500);
-      $(`.j__question_neutral_${question_id}`).removeClass('question-neutral-click', 500);
-      $(`.j__question_opposition_${question_id}`).toggleClass('question-opposition-click', 500);
-      $(`#question_${question_id}`).remove();
-      $("<input>", {
-        type: 'hidden', id: `question_${question_id}`, name: `choice[${question_id}]`, value: 'opposition'
-      }).appendTo(`.j__question_opposition_${question_id}`);
-    });
-  }
+  $('.j__question_agree').click(function() {
+    changeClass($(this), 'agree');
+    addValue($(this), 'agree');
+  });
+  $('.j__question_neutral').click(function() {
+    changeClass($(this), 'neutral');
+    addValue($(this), 'neutral');
+  });
+  $('.j__question_opposition').click(function() {
+    changeClass($(this), 'opposition');
+    addValue($(this), 'opposition');
+  });
+}
+
+function changeClass(element, value) {
+  let classes = ['agree', 'neutral', 'opposition']
+  let removeClasses = classes.filter(function(v) { return v !== value; });
+  element.toggleClass(`question-${value}-click`, 500);
+  element.siblings().removeClass(`question-${removeClasses[0]}-click`, 500);
+  element.siblings().removeClass(`question-${removeClasses[1]}-click`, 500);
+}
+
+function addValue(element, value) {
+  let question_id = element.parent().attr('id');
+
+  $(`#question_${question_id}`).remove();
+  $('<input>', {
+    type: 'hidden', id: `question_${question_id}`, name: `choice[${question_id}]`, value: value
+  }).appendTo(element);
 }
 
 $(() => {
