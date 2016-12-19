@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "release": "webpack --config config/production/webpack.config.js",
-    "build": "webpack --config config/development/webpack.config.js",
-    "watch": "webpack --watch --config config/development/webpack.config.js"
+    "release": "webpack --config config/webpack.production.js",
+    "build": "webpack --config config/webpack.development.js",
+    "watch": "webpack --watch --config config/webpack.development.js"
   },
   "name": "app_votematch",
   "version": "0.0.0",

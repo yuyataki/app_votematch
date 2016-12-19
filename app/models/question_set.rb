@@ -14,11 +14,8 @@ class QuestionSet < ApplicationRecord
     Party.joins(:scores).includes(:scores).merge(
       QuestionScore.of_question(questions)
     ).map do |party|
-      {
-        party: party,
-        total: party.scores.reduce(0) { |sum, s| sum + s.send(choice_params[s.question_id.to_s]) },
-        max_point: party.scores.reduce(0) { |sum, s| sum + s.max_point },
-      }
+      total = party.scores.reduce(0) { |sum, s| sum + s.send(choice_params[s.question_id.to_s]) }
+      { party: party, total: total, percent: 100 * total / (10 * questions.count) }
     end
   end
 
