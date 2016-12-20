@@ -1,0 +1,32 @@
+.nav-top {
+  list-style: none;
+  height: 35px;
+  text-align: right;
+  margin-left: -20px;
+  margin-right: -20px;
+  border-bottom: solid 1px #6495ed;
+  font-size: 0;
+}
+.nav-top > li {
+  display: inline-block;
+  line-height: 35px;
+  font-size: 1.2rem;
+}
+.nav-top > li > a {
+  display: block;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-decoration: none;
+}
+.nav-top > li > a:last-child {
+  padding-right: 15px;
+}
+.nav-top > li:hover {
+  background-color: #6495ed;
+  cursor: pointer;
+}
+.nav-top > li > a:hover {
+  display: block;
+  color: #fff;
+  background-color: #6495ed;
+}
