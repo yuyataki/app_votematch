@@ -5,6 +5,10 @@ class QuestionSet < ApplicationRecord
 
   enum status: { invisible: 0, visible: 1 }
 
+  def parties
+    questions.select(&:persisted?).first.try(:parties) || Party.active(Time.zone.now)
+  end
+
   def add_question(params)
     questions.new(params.merge(user: user))
     save

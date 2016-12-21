@@ -1,13 +1,11 @@
 class Mypage::QuestionSetsController < MypageController
   def show
     @question_set = current_user.question_sets.find(params[:id])
-
+    @parties = @question_set.parties
     @question = @question_set.questions.new
     @question.scores.new
 
-    @parties = Party.active(Time.zone.now)
-
-    gon.parties = Party.active(Time.zone.now).pluck(:id)
+    gon.parties = @parties.pluck(:id)
   rescue
     redirect_to mypage_path
   end

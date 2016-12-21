@@ -6,23 +6,26 @@ RSpec.describe Mypage::QuestionSetsController, type: :controller do
   describe 'GET #show' do
     let(:question_set) { create(:question_set, user: user) }
 
-    before do
+    let(:get_show) {
       get :show, params: { id: question_set }, session: { user: user }
-    end
+    }
 
     context "when the question_set is not current_users'" do
       let(:other_user) { create(:user) }
       let(:question_set) { create(:question_set, user: other_user) }
+      before { get_show }
       it { is_expected.to redirect_to mypage_path }
     end
 
     describe '@question_set' do
+      before { get_show }
       subject { assigns(:question_set) }
       it { is_expected.to be_present }
     end
 
     describe '@question_set.saved_questions' do
-      subject { assigns(:question_set).saved_questions }
+      before { get_show }
+      subject { assigns(:question_set).reload.saved_questions }
 
       context 'when no saved_questions' do
         it { is_expected.to be_blank }
@@ -35,11 +38,13 @@ RSpec.describe Mypage::QuestionSetsController, type: :controller do
     end
 
     describe '@question' do
+      before { get_show }
       subject { assigns(:question) }
       it { is_expected.to be_a(Question) }
     end
 
     describe '@question.scores' do
+      before { get_show }
       subject { assigns(:question).scores }
       its(:first) { is_expected.to be_a(QuestionScore) }
       its(:length) { is_expected.to eq 1 }
@@ -47,7 +52,19 @@ RSpec.describe Mypage::QuestionSetsController, type: :controller do
 
     describe '@parties' do
       subject { assigns(:parties) }
-      it { is_expected.to be_present }
+
+      context 'when no saved_questions' do
+        before { get_show }
+        it { is_expected.to be_present }
+      end
+
+      context 'when saved_questions exist' do
+        before do
+          create(:question, :with_scores, user: user, question_sets: [question_set])
+          get_show
+        end
+        its(:count) { is_expected.to eq 2 }
+      end
     end
   end
 

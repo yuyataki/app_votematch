@@ -3,6 +3,7 @@ class Question < ApplicationRecord
   has_many :question_set_relationships
   has_many :question_sets, through: :question_set_relationships
   has_many :scores, class_name: 'QuestionScore', dependent: :destroy
+  has_many :parties, through: :scores
 
   accepts_nested_attributes_for :scores
 end
