@@ -17,6 +17,12 @@ class Mypage::QuestionSetsController < MypageController
     redirect_to mypage_question_set_path(question_set)
   end
 
+  def update
+    current_user.question_sets.find(params[:id]).toggle_status
+
+    redirect_to mypage_path
+  end
+
   private
 
   def question_set_params

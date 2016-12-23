@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   post 'question_sets/:id/yourresult' => 'question_sets#yourresult'
 
   namespace 'mypage' do
-    resources :question_sets, only: %i(create show)
+    resources :question_sets, only: %i(create show update)
     resources :questions do
       resources :question_scores
     end
