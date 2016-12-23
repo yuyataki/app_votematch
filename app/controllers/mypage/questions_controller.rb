@@ -23,7 +23,9 @@ class Mypage::QuestionsController < MypageController
 
   def update
     @question = Question.find(params[:id])
-    @question.update_attributes!(question_params)
+    @question.update(question_params)
+    session[:errors] = @question.errors.full_messages
+
     render 'show'
   end
 

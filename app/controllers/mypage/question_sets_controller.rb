@@ -19,10 +19,6 @@ class Mypage::QuestionSetsController < MypageController
 
   private
 
-  def clear_session_errors
-    session[:errors] = []
-  end
-
   def question_set_params
     params.require(:question_set).permit(:user, :title)
   end

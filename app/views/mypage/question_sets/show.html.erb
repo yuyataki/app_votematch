@@ -1,14 +1,6 @@
 <div class="container  create-question">
   <h3>タイトル：<%= link_to @question_set.title, question_set_path(@question_set) %></h3>
-  <% if session[:errors].present? %>
-    <div class="errors-wrap">
-      <div class="errors">
-        <% session[:errors].each do |error_message|  %>
-          <div class="validation_error"><%= error_message %></div>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
+  <%= render 'layouts/error' %>
 
   <%= form_for([:mypage, @question]) do |f| %>
     <%= f.hidden_field :question_set, value: @question_set.id %>
@@ -28,7 +20,7 @@
         <th>賛成度</th>
         <th>中立度</th>
         <th>反対度</th>
-        <th class="party-delete">削除</th>
+        <% if @question_set.saved_questions.blank? %><th class="party-delete">削除</th><% end %>
         <th class="point-alert"> </th>
       </tr>
       <% @parties.each do |party| %>
@@ -47,9 +39,11 @@
               <%= qs_f.select :opposition, QuestionScore::SCORES, { include_blank: true, selected: '' }, class: "j__point_#{party.id}" %>
             </td>
           <% end %>
-          <td class="party-delete" style="text-align:center;">
-            <i class="fa fa-times j__delete_party" aria-hidden="true"></i>
-          </td>
+          <% if @question_set.saved_questions.blank? %>
+            <td class="party-delete" style="text-align:center;">
+              <i class="fa fa-times j__delete_party" aria-hidden="true"></i>
+            </td>
+          <% end %>
           <td><span class="j__alert" id="j__alert_<%= party.id %>"></span></td>
         </tr>
       <% end %>
