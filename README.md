@@ -15,4 +15,9 @@
 * How to run the test suite
  - `RAILS_ENV=test bin/rspec spec`
 
+* About frontend
+ - `cd frontend`
+ - `npm install`
+ - Use command `npm run watch` when developing.
+
 * Deployment instructions
