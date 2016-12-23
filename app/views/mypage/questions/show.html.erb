@@ -2,40 +2,44 @@
   <%= render 'layouts/error' %>
 
   <%= form_for([:mypage, @question]) do |f| %>
-    <div class="question-score-list-show">
-      <div class="question-title clearfix">
-        <div class="question">質問</div>
-        <div class="question-field">
-          <%= f.text_field :title, class: 'question-create-title' %>
+    <table class="table">
+      <tr>
+        <div class="question-score-list-show">
+          <div class="question-title clearfix">
+            <div class="question">質問</div>
+            <div class="question-field">
+              <%= f.text_field :title, class: 'question-create-title' %>
+            </div>
+          </div>
         </div>
-      </div>
-      <table class="table">
-        <tr>
-          <td class="question-score">政党名</td>
-          <td class="question-score">賛成度</td>
-          <td class="question-score">中立度</td>
-          <td class="question-score">反対度</td>
-          <th class="point-alert"> </th>
+      </tr>
+      <tr>
+        <th>政党</th>
+        <th>賛成度</th>
+        <th>中立度</th>
+        <th>反対度</th>
+        <th class="point-alert"> </th>
+      </tr>
+      <%= f.fields_for :scores, @question.scores.eager_load(:party) do |qs_f| %>
+        <% party = qs_f.object.party %>
+        <tr id="j__party_<%= party.id %>">
+          <td>
+            <%= party.name %>
+            <%= qs_f.hidden_field :party_id, value: party.id %>
+          </td>
+          <td>
+            <%= qs_f.select :agree, QuestionScore::SCORES, { include_blank: true }, class: "j__point_#{party.id}" %>
+          </td>
+          <td>
+            <%= qs_f.select :neutral, QuestionScore::SCORES, { include_blank: true }, class: "j__point_#{party.id}" %>
+          </td>
+          <td>
+            <%= qs_f.select :opposition, QuestionScore::SCORES, { include_blank: true }, class: "j__point_#{party.id}" %>
+          </td>
+          <td><span class="j__alert" id="j__alert_<%= party.id %>"></span></td>
         </tr>
-        <%= f.fields_for :scores do |qs_f| %>
-          <%= qs_f.hidden_field :party_id, value: qs_f.object.party_id %>
-          <% party = qs_f.object.party %>
-          <tr>
-            <td class="question-score"><%= party.name %></td>
-            <td class="question-score">
-              <%= qs_f.select :agree, QuestionScore::SCORES, { include_blank: true }, class: "j__point_#{party.id}" %>
-            </td>
-            <td class="question-score">
-              <%= qs_f.select :neutral, QuestionScore::SCORES, { include_blank: true }, class: "j__point_#{party.id}" %>
-            </td>
-            <td class="question-score">
-              <%= qs_f.select :opposition, QuestionScore::SCORES, { include_blank: true }, class: "j__point_#{party.id}" %>
-            </td>
-            <td><span id="j__alert_<%= qs_f.object.party_id %>" class="point-alert"></span></td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
+      <% end %>
+    </table>
     <div class="submit"><%= f.submit '更新', class: 'submit-button' %></div>
   <% end %>
 </div>

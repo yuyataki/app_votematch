@@ -107,7 +107,7 @@ RSpec.describe Mypage::QuestionsController, type: :controller do
 
     describe 'render template' do
       before { post_update }
-      it { is_expected.to render_template('show') }
+      it { is_expected.to redirect_to mypage_question_path(question) }
     end
 
     it 'question title is changed' do

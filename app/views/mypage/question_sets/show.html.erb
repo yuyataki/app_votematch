@@ -24,8 +24,8 @@
         <th class="point-alert"> </th>
       </tr>
       <% @parties.each do |party| %>
-        <tr id="j__party_<%= party.id %>">
-          <%= f.fields_for :scores do |qs_f| %>
+        <%= f.fields_for :scores do |qs_f| %>
+          <tr id="j__party_<%= party.id %>">
             <td>
               <%= qs_f.select :party_id, @parties.map { |party| [party.name, party.id] }, selected: party.id %>
             </td>
@@ -38,14 +38,14 @@
             <td>
               <%= qs_f.select :opposition, QuestionScore::SCORES, { include_blank: true, selected: '' }, class: "j__point_#{party.id}" %>
             </td>
-          <% end %>
-          <% if @question_set.saved_questions.blank? %>
-            <td class="party-delete" style="text-align:center;">
-              <i class="fa fa-times j__delete_party" aria-hidden="true"></i>
-            </td>
-          <% end %>
-          <td><span class="j__alert" id="j__alert_<%= party.id %>"></span></td>
-        </tr>
+            <% if @question_set.saved_questions.blank? %>
+              <td class="party-delete" style="text-align:center;">
+                <i class="fa fa-times j__delete_party" aria-hidden="true"></i>
+              </td>
+            <% end %>
+            <td><span class="j__alert" id="j__alert_<%= party.id %>"></span></td>
+          </tr>
+        <% end %>
       <% end %>
     </table>
     <div class="submit"><%= f.submit '追加', class: 'submit-button' %></div>

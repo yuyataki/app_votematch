@@ -3,7 +3,7 @@ a:hover {
 }
 .clearfix::after {
   content: '';
-;  display: block;
+  display: block;
   clear: both;
 }
 .accordion {
@@ -21,6 +21,9 @@ a:hover {
 }
 .party-delete {
   text-align: center;
+}
+.party-delete:hover {
+  cursor: pointer;
 }
 .submit {
   text-align: right;
@@ -85,8 +88,10 @@ a.question-edit {
   padding: 3px 5px 1px;
   font-size: 1.2rem;
 }
-a.question-edit:hover {
-  color: #fff;
+a.question-edit:hover, .submit-button:hover {
+  color: #3f7ee2;
+  background-color: #cce6ff;
+  text-decoration: none;
 }
 .errors-wrap {
   text-align: center;

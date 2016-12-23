@@ -24,6 +24,6 @@ class QuestionSet < ApplicationRecord
   end
 
   def saved_questions
-    questions.select(&:persisted?)
+    questions.eager_load(scores: :party).select(&:persisted?)
   end
 end

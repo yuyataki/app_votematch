@@ -1,4 +1,6 @@
 class Mypage::QuestionsController < MypageController
+  after_action :clear_session_errors, only: :show
+
   def index
     @question = Question.new
     @question.scores.new
@@ -22,11 +24,11 @@ class Mypage::QuestionsController < MypageController
   end
 
   def update
-    @question = Question.find(params[:id])
-    @question.update(question_params)
-    session[:errors] = @question.errors.full_messages
+    question = current_user.questions.find(params[:id])
+    question.update(question_params)
+    session[:errors] = question.errors.full_messages
 
-    render 'show'
+    redirect_to mypage_question_path(question)
   end
 
   private
