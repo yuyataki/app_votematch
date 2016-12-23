@@ -36,13 +36,13 @@
               <%= qs_f.select :party_id, @parties.map { |party| [party.name, party.id] }, selected: party.id %>
             </td>
             <td>
-              <%= qs_f.select :agree, QuestionScore::SCORES, { include_blank: true }, class: "j__point_#{party.id}" %>
+              <%= qs_f.select :agree, QuestionScore::SCORES, { include_blank: true, selected: '' }, class: "j__point_#{party.id}" %>
             </td>
             <td>
-              <%= qs_f.select :neutral, QuestionScore::SCORES, { include_blank: true }, class: "j__point_#{party.id}" %>
+              <%= qs_f.select :neutral, QuestionScore::SCORES, { include_blank: true, selected: '' }, class: "j__point_#{party.id}" %>
             </td>
             <td>
-              <%= qs_f.select :opposition, QuestionScore::SCORES, { include_blank: true }, class: "j__point_#{party.id}" %>
+              <%= qs_f.select :opposition, QuestionScore::SCORES, { include_blank: true, selected: '' }, class: "j__point_#{party.id}" %>
             </td>
           <% end %>
           <td class="party-delete" style="text-align:center;">

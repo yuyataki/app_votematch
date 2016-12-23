@@ -29,4 +29,21 @@ RSpec.describe QuestionScore, type: :model do
       its('errors.full_messages') { is_expected.to contain_exactly(*expectation) }
     end
   end
+
+  describe '#set_zero' do
+    context 'agree is nil' do
+      let(:score) { build(:question_score, agree: nil, neutral: 3, opposition: 7) }
+      it { expect { score.valid? }.to change { score.agree }.from(nil).to(0) }
+    end
+
+    context 'neutral is nil' do
+      let(:score) { build(:question_score, agree: 3, neutral: nil, opposition: 7) }
+      it { expect { score.valid? }.to change { score.neutral }.from(nil).to(0) }
+    end
+
+    context 'agree is nil' do
+      let(:score) { build(:question_score, agree: 7, neutral: 3, opposition: nil) }
+      it { expect { score.valid? }.to change { score.opposition }.from(nil).to(0) }
+    end
+  end
 end

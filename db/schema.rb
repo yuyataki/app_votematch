@@ -38,13 +38,13 @@ ActiveRecord::Schema.define(version: 20161112000000) do
   end
 
   create_table "question_scores", force: :cascade do |t|
-    t.integer  "question_id",           null: false
-    t.integer  "party_id",              null: false
-    t.integer  "agree",       limit: 2, null: false
-    t.integer  "neutral",     limit: 2, null: false
-    t.integer  "opposition",  limit: 2, null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.integer  "question_id",                       null: false
+    t.integer  "party_id",                          null: false
+    t.integer  "agree",       limit: 2, default: 0, null: false
+    t.integer  "neutral",     limit: 2, default: 0, null: false
+    t.integer  "opposition",  limit: 2, default: 0, null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.index ["party_id"], name: "index_question_scores_on_party_id", using: :btree
     t.index ["question_id", "party_id"], name: "index_question_scores_on_question_id_and_party_id", unique: true, using: :btree
     t.index ["question_id"], name: "index_question_scores_on_question_id", using: :btree
