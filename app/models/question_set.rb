@@ -11,7 +11,7 @@ class QuestionSet < ApplicationRecord
 
   def add_question(params)
     questions.new(params.merge(user: user))
-    save
+    save! if valid?
   end
 
   def results(choice_params)

@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    errors:
+      messages:
+        be_ten_points: 'は10ポイントにしてください'
+        not_less_than_two: 'は2つ以上にしてください'
+        not_duplicate: 'は重複できません'
+        record_invalid: "バリデーションに失敗しました: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "%{record}が存在しているので削除できません"
+          has_many: "%{record}が存在しているので削除できません"
+    attributes:
+      question:
+        parties_count: '政党数'
+        distinct_parties_count: '政党'
+      question_score:
+        total_score: 'ポイントの合計'
+      scores:
+        total_score: 'ポイントの合計'

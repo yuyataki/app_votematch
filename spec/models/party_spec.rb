@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Party' do
+RSpec.describe Party, type: :model do
   describe '.active' do
     subject { Party.active(time) }
 

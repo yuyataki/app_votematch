@@ -72,7 +72,7 @@ RSpec.describe Mypage::QuestionsController, type: :controller do
     let(:question_params) { attributes_for(:question, user: user, question_set: question_set) }
     let(:score_params) {
       %i(leberal_democratic communist).map.with_index do |party, num|
-        [num, build(:question_score, party).attributes]
+        [num, attributes_for(:question_score, party).merge(party_id: build(:party, party).id)]
       end.to_h
     }
     let(:params) { { question: question_params.merge(scores_attributes: score_params) } }
@@ -86,7 +86,7 @@ RSpec.describe Mypage::QuestionsController, type: :controller do
   end
 
   describe 'POST #update' do
-    let(:question) { create(:question, :with_scores, user: user) }
+    let(:question) { create(:question, user: user) }
     let(:score_attributes) {
       question.scores.map.with_index do |score, num|
         [num, score.attributes.except('created_at', 'question_id', 'updated_at')]

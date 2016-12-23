@@ -1,4 +1,6 @@
 class Mypage::QuestionSetsController < MypageController
+  after_action :clear_session_errors
+
   def show
     @question_set = current_user.question_sets.find(params[:id])
     @parties = @question_set.parties
@@ -16,6 +18,10 @@ class Mypage::QuestionSetsController < MypageController
   end
 
   private
+
+  def clear_session_errors
+    session[:errors] = []
+  end
 
   def question_set_params
     params.require(:question_set).permit(:user, :title)

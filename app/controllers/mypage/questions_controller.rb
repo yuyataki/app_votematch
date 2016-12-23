@@ -16,6 +16,8 @@ class Mypage::QuestionsController < MypageController
   def create
     question_set = current_user.question_sets.find(params[:question][:question_set])
     question_set.add_question(question_params)
+    session[:errors] = question_set.questions.map(&:errors).map(&:full_messages).flatten
+
     redirect_to mypage_question_set_path(question_set)
   end
 

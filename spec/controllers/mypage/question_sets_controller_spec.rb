@@ -60,7 +60,7 @@ RSpec.describe Mypage::QuestionSetsController, type: :controller do
 
       context 'when saved_questions exist' do
         before do
-          create(:question, :with_scores, user: user, question_sets: [question_set])
+          create(:question, user: user, question_sets: [question_set])
           get_show
         end
         its(:count) { is_expected.to eq 2 }
