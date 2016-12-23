@@ -11,6 +11,7 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
     attributes:
       question:
+        title: '質問のタイトル'
         parties_count: '政党数'
         distinct_parties_count: '政党'
       question_score:

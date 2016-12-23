@@ -9,6 +9,7 @@ class Question < ApplicationRecord
 
   accepts_nested_attributes_for :scores
 
+  validates :title, presence: true
   validate :check_parties_count, :check_question_and_party
 
   private
