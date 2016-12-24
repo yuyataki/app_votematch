@@ -22,7 +22,7 @@
           <div class="question-title clearfix">
             <div class="question">質問</div>
             <div class="question-field">
-              <%= f.text_field :title, class: 'question-create-title' %>
+              <%= f.text_field :title, value: session[:question_title], class: 'question-create-title' %>
             </div>
           </div>
         </div>
@@ -42,13 +42,19 @@
               <%= qs_f.select :party_id, @parties.map { |party| [party.name, party.id] }, selected: party.id %>
             </td>
             <td>
-              <%= qs_f.select :agree, QuestionScore::SCORES, { include_blank: true, selected: '' }, class: "j__point_#{party.id}" %>
+              <%= qs_f.select :agree, QuestionScore::SCORES,
+                { include_blank: true, selected: session[:scores_attributes].try(:[], party.id.to_s).try(:[], 'agree') },
+                class: "j__point_#{party.id}" %>
             </td>
             <td>
-              <%= qs_f.select :neutral, QuestionScore::SCORES, { include_blank: true, selected: '' }, class: "j__point_#{party.id}" %>
+              <%= qs_f.select :neutral, QuestionScore::SCORES,
+                { include_blank: true, selected: session[:scores_attributes].try(:[], party.id.to_s).try(:[], 'neutral') },
+                class: "j__point_#{party.id}" %>
             </td>
             <td>
-              <%= qs_f.select :opposition, QuestionScore::SCORES, { include_blank: true, selected: '' }, class: "j__point_#{party.id}" %>
+              <%= qs_f.select :opposition, QuestionScore::SCORES,
+                { include_blank: true, selected:  session[:scores_attributes].try(:[], party.id.to_s).try(:[], 'opposition') },
+                class: "j__point_#{party.id}" %>
             </td>
             <% if @question_set.saved_questions.blank? %>
               <td class="party-delete" style="text-align:center;">

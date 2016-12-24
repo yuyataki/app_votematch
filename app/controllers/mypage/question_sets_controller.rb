@@ -26,8 +26,8 @@ class Mypage::QuestionSetsController < MypageController
   def update
     question_set = current_user.question_sets.find(params[:id])
     question_set.attributes = question_set_params
-    allocate_after_update(question_set)
 
+    redirect_back(fallback_location: mypage_path)
     session[:errors] = question_set.errors.full_messages unless question_set.save
   end
 
@@ -37,15 +37,6 @@ class Mypage::QuestionSetsController < MypageController
   end
 
   private
-
-  def allocate_after_update(question_set)
-    case
-    when question_set.status_changed?
-      redirect_back(fallback_location: mypage_path)
-    when question_set.title_changed?
-      redirect_to mypage_question_set_path(question_set)
-    end
-  end
 
   def question_set_params
     params.require(:question_set).permit(*%i(user title status))

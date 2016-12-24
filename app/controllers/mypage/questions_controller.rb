@@ -19,6 +19,7 @@ class Mypage::QuestionsController < MypageController
     question_set = current_user.question_sets.find(params[:question][:question_set])
     question_set.add_question(question_params)
     session[:errors] = question_set.questions.map(&:errors).map(&:full_messages).flatten
+    handle_session(session)
 
     redirect_to mypage_question_set_path(question_set)
   end
@@ -33,9 +34,21 @@ class Mypage::QuestionsController < MypageController
 
   private
 
+  def handle_session(session)
+    if session[:errors].present?
+      session[:scores_attributes] = question_params['scores_attributes'].to_h.map do |_k, v|
+        [v['party_id'].to_i, v.except('party_id')]
+      end.to_h
+      session[:question_title] = question_params[:title]
+    else
+      session[:scores_attributes] = nil
+      session[:question_title] = nil
+    end
+  end
+
   def question_params
     params.require(:question).permit(
-      :user, :title, scores_attributes: [:id, :party_id, :agree, :neutral, :opposition]
+      :user, :title, scores_attributes: %i(id party_id agree neutral opposition)
     )
   end
 end
