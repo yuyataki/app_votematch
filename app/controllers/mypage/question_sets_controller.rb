@@ -18,7 +18,20 @@ class Mypage::QuestionSetsController < MypageController
   end
 
   def update
-    current_user.question_sets.find(params[:id]).toggle_status
+    question_set = current_user.question_sets.find(params[:id])
+    question_set.attributes = question_set_params
+
+    if question_set.status_changed?
+      redirect_to mypage_path
+    elsif question_set.title_changed?
+      redirect_to mypage_question_set_path(question_set)
+    end
+    question_set.save!
+  end
+
+  def update_title
+    question_set = current_user.question_sets.find(params[:id])
+    question_set.update(question_set_params)
 
     redirect_to mypage_path
   end
@@ -26,6 +39,6 @@ class Mypage::QuestionSetsController < MypageController
   private
 
   def question_set_params
-    params.require(:question_set).permit(:user, :title)
+    params.require(:question_set).permit(*%i(user title status))
   end
 end

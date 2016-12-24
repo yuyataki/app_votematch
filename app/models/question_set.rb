@@ -5,6 +5,8 @@ class QuestionSet < ApplicationRecord
 
   enum status: { invisible: 0, visible: 1 }
 
+  validates :title, presence: true
+
   def parties
     questions.find(&:persisted?).try(:parties) || Party.active(Time.zone.now)
   end
@@ -12,11 +14,6 @@ class QuestionSet < ApplicationRecord
   def add_question(params)
     questions.new(params.merge(user: user))
     save! if valid?
-  end
-
-  def toggle_status
-    visible? ? invisible! : visible!
-    save!
   end
 
   def results(choice_params)

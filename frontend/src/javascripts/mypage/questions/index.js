@@ -35,8 +35,16 @@ function showQuestionScore() {
   });
 }
 
+function toggleQuestionSetTitle() {
+  $('.edit-submit-button').click(function() {
+    $('.j__show-title').toggle();
+    $('.j__edit-title').toggle();
+  });
+}
+
 $(() => {
   removeParty();
   addQuestionScore();
   showQuestionScore();
+  toggleQuestionSetTitle();
 });

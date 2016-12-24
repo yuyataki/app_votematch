@@ -3,7 +3,7 @@ class MypageController < ApplicationController
 
   def index
     @question_set = QuestionSet.new
-    @question_sets = current_user.question_sets
+    @question_sets = current_user.question_sets.decorate
   end
 
   def show

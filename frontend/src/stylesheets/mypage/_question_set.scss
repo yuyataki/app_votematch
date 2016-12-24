@@ -110,3 +110,33 @@ a.question-edit:hover, .submit-button:hover {
   font-size: 1.2rem;
   margin: 8px;
 }
+.edit-title, .show-title {
+  display: table;
+  margin-bottom: 10px;
+  table-layout : fixed;
+  width : 100% ;
+}
+.question-set-title-text, .question-set-title-text-show {
+  font-size: 2.0rem;
+  display: table-cell;
+  width: 100%;
+  padding-right: 120px;
+  white-space: nowrap;
+}
+.question-set-title-text-show {
+  display: table-cell;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.question-set-title-text-show > a {
+  display: inline-block;
+}
+.edit-title-button {
+  display: table-cell;
+  width: 120px;
+  text-align: right;
+}
+.question-create-title {
+  width: 100%;
+}
