@@ -34,6 +34,8 @@ function showQuestionScore() {
   $('.j__show_question_score').click(function() {
     $(this).next('.accordion').slideToggle(300);
     $('.j__accordion_change', this).toggleClass('fa-caret-square-o-down fa-caret-square-o-up');
+    let position = $(this).offset().top;
+    $('html, body').animate({ scrollTop : position }, { queue : false });
   });
 }
 
