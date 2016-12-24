@@ -164,3 +164,12 @@ a:hover {
   color: #fff;
   padding: 3px 5px 1px;
 }
+.submit-button[disabled] {
+  border: solid 2px #bdbdbd;
+  color: #bdbdbd;
+}
+.submit-button[disabled]:hover {
+  border: solid 2px #bdbdbd;
+  color: #bdbdbd;
+  background-color: #fff;
+}
