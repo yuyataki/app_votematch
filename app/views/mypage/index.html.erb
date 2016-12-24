@@ -1,4 +1,6 @@
 <div class="container">
+  <%= render 'layouts/error' %>
+
   <div>
     <%= form_for([:mypage, @question_set]) do |f| %>
       <div class="question-score-list-show">
@@ -29,7 +31,11 @@
           <td><%= question_set.status_text %></td>
           <td>
             <%= f.hidden_field :status, value: question_set.toggle_status %>
-            <%= f.submit question_set.visible? ? '非公開にする' : '公開する', class: 'question-set-edit' %>
+            <% if question_set.visible? %>
+              <%= f.submit '非公開にする', class: 'question-edit-visible' %>
+            <% elsif %>
+              <%= f.submit '公開する', class: 'question-edit-invisible' %>
+            <% end %>
           </td>
         </tr>
       <% end %>

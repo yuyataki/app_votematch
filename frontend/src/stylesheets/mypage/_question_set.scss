@@ -28,10 +28,6 @@ a:hover {
 .submit {
   text-align: right;
 }
-.votematch-submit {
-  margin-top: 5px;
-  text-align: right;
-}
 .question-score-list {
   margin-top: 10px;
 }
@@ -79,7 +75,7 @@ a:hover {
 .edit-row {
   text-align: right;
 }
-a.question-edit {
+.question-edit {
   display: inline-block;
   border-radius: 2px;
   border: solid 2px #3f7ee2;
@@ -88,7 +84,7 @@ a.question-edit {
   padding: 3px 5px 1px;
   font-size: 1.2rem;
 }
-a.question-edit:hover, .submit-button:hover {
+.question-edit:hover, .submit-button:hover {
   color: #3f7ee2;
   background-color: #cce6ff;
   text-decoration: none;

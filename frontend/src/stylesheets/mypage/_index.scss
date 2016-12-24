@@ -1,0 +1,31 @@
+td {
+  vertical-align: baseline;
+}
+.votematch-submit {
+  margin-top: 5px;
+  text-align: right;
+}
+.question-edit-visible, .question-edit-invisible {
+  display: inline-block;
+  width: 90px;
+  border-radius: 1px;
+  font-size: 1.1rem;
+}
+.question-edit-visible {
+  border: solid 2px #3f7ee2;
+  background-color: #3f7ee2;
+  color: #fff;
+  padding: 3px 5px 1px;
+}
+.question-edit-invisible, .question-edit-visible:hover {
+  border: solid 1px #3f7ee2;
+  background-color: #fff;
+  color: #3f7ee2;
+  padding: 3px 5px 1px;
+}
+.question-edit-visible, .question-edit-invisible:hover {
+  border: solid 1px #3f7ee2;
+  background-color: #3f7ee2;
+  color: #fff;
+  padding: 3px 5px 1px;
+}

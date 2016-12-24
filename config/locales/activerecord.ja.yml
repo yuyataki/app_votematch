@@ -10,6 +10,8 @@ ja:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
     attributes:
+      question_set:
+        title: 'タイトル'
       question:
         title: '質問のタイトル'
         parties_count: '政党数'

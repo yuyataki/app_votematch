@@ -1,5 +1,5 @@
 class Mypage::QuestionSetsController < MypageController
-  after_action :clear_session_errors
+  after_action :clear_session_errors, only: %i(show)
 
   def show
     @question_set = current_user.question_sets.find(params[:id])
@@ -13,8 +13,14 @@ class Mypage::QuestionSetsController < MypageController
   end
 
   def create
-    question_set = current_user.question_sets.create!(question_set_params)
-    redirect_to mypage_question_set_path(question_set)
+    question_set = current_user.question_sets.new(question_set_params)
+
+    if question_set.save
+      redirect_to mypage_question_set_path(question_set)
+    else
+      session[:errors] = question_set.errors.full_messages
+      redirect_to mypage_path
+    end
   end
 
   def update
@@ -27,13 +33,6 @@ class Mypage::QuestionSetsController < MypageController
       redirect_to mypage_question_set_path(question_set)
     end
     question_set.save!
-  end
-
-  def update_title
-    question_set = current_user.question_sets.find(params[:id])
-    question_set.update(question_set_params)
-
-    redirect_to mypage_path
   end
 
   private
