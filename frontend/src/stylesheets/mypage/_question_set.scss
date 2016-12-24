@@ -136,3 +136,31 @@ a:hover {
 .question-create-title {
   width: 100%;
 }
+.question-set-show-bottom {
+  margin-top: 10px;
+  text-align: right;
+}
+.question-set-show-edit-visible, .question-set-show-edit-invisible {
+  display: inline-block;
+  width: 150px;
+  border-radius: 2px;
+  font-size: 2rem;
+}
+.question-set-show-edit-visible {
+  border: solid 2px #3f7ee2;
+  background-color: #3f7ee2;
+  color: #fff;
+  padding: 3px 5px 1px;
+}
+.question-set-show-edit-invisible, .question-set-show-edit-visible:hover {
+  border: solid 2px #3f7ee2;
+  background-color: #fff;
+  color: #3f7ee2;
+  padding: 3px 5px 1px;
+}
+.question-set-show-edit-visible, .question-set-show-edit-invisible:hover {
+  border: solid 2px #3f7ee2;
+  background-color: #3f7ee2;
+  color: #fff;
+  padding: 3px 5px 1px;
+}
