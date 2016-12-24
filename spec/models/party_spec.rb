@@ -44,7 +44,7 @@ RSpec.describe Party, type: :model do
     end
 
     context '2012年12月第23回衆院選の場合' do
-      let(:time) { Time.zone.local(2012, 12, 4) }
+      let(:time) { Time.zone.local(2012, 12, 5) }
 
       let(:expectation) {
         [

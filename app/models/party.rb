@@ -11,9 +11,10 @@ class Party < ApplicationRecord
     found_witouht_party_condition: 6, # 政党要件なしで結党
   }
 
+  t = arel_table
   scope :active, ->(time) {
     found.or(rename).or(acquire_party_condition).where(
-      acted_on: Time.zone.local(0)..time, ended_on: time..Time.zone.local(9999, 12, 31)
+      t[:acted_on].lteq(time).and(t[:ended_on].gt(time))
     )
   }
 end

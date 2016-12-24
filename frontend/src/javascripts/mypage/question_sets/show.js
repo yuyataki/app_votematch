@@ -1,10 +1,12 @@
 import $ from 'jquery';
 
 function checkQuestionScore() {
-  for(let party_id of gon.parties || []) {
-    $(`.j__point_${party_id}`).change(function() {
+  if(gon.parties === undefined) { gon.parties = [] }
+
+  for(let i = 0; i < gon.parties.length; i++) {
+    $(`.j__point_${gon.parties[i]}`).change(function() {
       let points = [];
-      $(`.j__point_${party_id}`).each(function(i, element) {
+      $(`.j__point_${gon.parties[i]}`).each(function(i, element) {
         if($(element).val() !== '') {
           points.push(Number($(element).val()));
         }

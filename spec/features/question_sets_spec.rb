@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.feature 'show /question_set/:id', type: :feature do
-    given!(:question_set) { create(:question_set) }
-    given!(:question1) { create(:question, question_sets: [question_set]) }
-    given!(:question2) { create(:question, question_sets: [question_set]) }
+  given!(:question_set) { create(:question_set) }
+  given!(:question1) { create(:question, question_sets: [question_set]) }
+  given!(:question2) { create(:question, question_sets: [question_set]) }
 
   scenario 'check toggle css', :js do
     visit question_set_path(question_set)

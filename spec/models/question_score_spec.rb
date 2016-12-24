@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe QuestionScore, type: :model do
-
   describe 'validations' do
     let(:score) { build(:question_score, points) }
 

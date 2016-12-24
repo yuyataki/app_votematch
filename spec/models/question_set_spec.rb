@@ -14,7 +14,7 @@ RSpec.describe QuestionSet, type: :model do
       question1.scores.find_by(party: communist).update!(agree: 6, neutral: 3, opposition: 1)
     end
 
-    let(:choice_params) { { question1.id => 'agree', question2.id => 'opposition'}.stringify_keys }
+    let(:choice_params) { { question1.id => 'agree', question2.id => 'opposition' }.stringify_keys }
     subject { question_set.results(choice_params) }
 
     let(:expectation) {
