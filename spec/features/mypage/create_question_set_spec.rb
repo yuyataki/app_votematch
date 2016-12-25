@@ -83,4 +83,46 @@ RSpec.feature 'Create QuestionSet', type: :feature do
 
     expect(user.question_sets.length).to eq 0
   end
+
+  scenario 'Create QuestionSet and edit title and status', :js do
+    visit mypage_path
+
+    fill_in 'question_set[title]', with: 'テストタイトル'
+    click_button 'ボートマッチを作成する'
+
+    expect(current_path).to eq mypage_question_set_path(user.question_sets.last)
+
+    click_button '編集'
+    fill_in 'question_set[title]', with: 'テストタイトル編集後'
+
+    expect { click_button '保存' }.to change {
+      user.question_sets.last.title
+    }.from('テストタイトル').to('テストタイトル編集後')
+
+    expect(current_path).to eq mypage_question_set_path(user.question_sets.last)
+
+    expect { click_button '公開する' }.to change {
+      user.question_sets.last.status
+    }.from('invisible').to('visible')
+
+    expect(current_path).to eq mypage_question_set_path(user.question_sets.last)
+  end
+
+  scenario 'Create QuestionSet and change status at mypage', :js do
+    visit mypage_path
+
+    fill_in 'question_set[title]', with: 'テストタイトル'
+    click_button 'ボートマッチを作成する'
+
+    expect(current_path).to eq mypage_question_set_path(user.question_sets.last)
+
+    visit mypage_path
+
+    page.save_screenshot 'screenshot.png'
+    expect { first('.question-edit-invisible').click }.to change {
+      user.question_sets.last.status
+    }.from('invisible').to('visible')
+
+    expect(current_path).to eq mypage_path
+  end
 end
