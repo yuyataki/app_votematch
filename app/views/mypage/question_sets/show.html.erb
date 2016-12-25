@@ -78,17 +78,17 @@
       <div class="accordion">
         <table class="table">
           <tr>
-            <td class="question-score">政党名</td>
-            <td class="question-score">賛成度</td>
-            <td class="question-score">中立度</td>
-            <td class="question-score">反対度</td>
+            <td>政党名</td>
+            <td>賛成度</td>
+            <td>中立度</td>
+            <td>反対度</td>
           </tr>
           <% question.scores.each do |score| %>
             <tr>
-              <td class="question-score"><%= score.party.name %></td>
-              <td class="question-score"><%= score.agree %></td>
-              <td class="question-score"><%= score.neutral %></td>
-              <td class="question-score"><%= score.opposition %></td>
+              <td><%= score.party.name %></td>
+              <td><%= score.agree %></td>
+              <td><%= score.neutral %></td>
+              <td><%= score.opposition %></td>
             </tr>
           <% end %>
           <tr>

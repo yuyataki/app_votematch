@@ -30,7 +30,7 @@ RSpec.feature 'Create QuestionSet', type: :feature do
     expect(current_path).to eq mypage_question_set_path(user.question_sets.last)
   end
 
-  scenario 'Create QuestionSet successfully but only one party and less than 10 points', js: true do
+  scenario 'Create QuestionSet successfully but only one party and less than 10 points', :js do
     visit mypage_path
 
     fill_in 'question_set[title]', with: 'ボートマッチタイトル'
@@ -50,13 +50,25 @@ RSpec.feature 'Create QuestionSet', type: :feature do
       expect(page).to have_content 'ポイントの合計は10にしてください。'
     end
 
-    click_button '追加'
+    expect(page).to have_button('追加', disabled: true)
 
-    within '.errors' do
-      expect(page).to have_content 'ポイントの合計は10ポイントにしてください'
-      expect(page).to have_content '質問のタイトルを入力してください'
-      expect(page).to have_content '政党数は2つ以上にしてください'
+  end
+
+  scenario 'Create QuestionSet successfully but only one party and less than 10 points w/o js' do
+    visit mypage_path
+
+    fill_in 'question_set[title]', with: 'ボートマッチタイトル'
+    click_button 'ボートマッチを作成する'
+
+    parties_count.times do |i|
+      select 3, from: "question_scores_attributes_#{i}_agree"
+      select 3, from: "question_scores_attributes_#{i}_neutral"
+      select 3, from: "question_scores_attributes_#{i}_opposition"
     end
+
+    expect(page).not_to have_content 'ポイントの合計は10にしてください。'
+
+    expect(page).to have_button('追加', disabled: true)
   end
 
   scenario 'Create QuestionSet unsuccessfully', :js do

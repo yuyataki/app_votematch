@@ -1,7 +1,9 @@
 import $ from 'jquery';
+let partiesNotDeleted;
 
 function checkQuestionScore() {
   if(gon.parties === undefined) { gon.parties = [] }
+
   for(let i = 0; i < gon.parties.length; i++) {
     $(`.j__point_${gon.parties[i]}`).change(function() {
       getTotalScore();
@@ -25,12 +27,13 @@ function checkQuestionScore() {
 }
 function getTotalScore() {
   let sum = 0;
-  for(let i = 0; i < gon.parties.length; i++) {
-    $(`.j__point_${gon.parties[i]}`).each(function(i, element) {
+  let parties = partiesNotDeleted === undefined ? gon.parties : partiesNotDeleted
+  for(let i = 0; i < parties.length; i++) {
+    $(`.j__point_${parties[i]}`).each(function(i, element) {
       sum = sum + Number($(element).val());
     });
   }
-  if(sum === gon.parties.length * 10) {
+  if(sum === parties.length * 10) {
     $('.j__add_question').prop('disabled', false);
   } else {
     $('.j__add_question').prop('disabled', true);
@@ -39,6 +42,9 @@ function getTotalScore() {
 function removeParty() {
   $('.j__delete_party').click(function() {
     $(this).parent().parent().empty();
+    partiesNotDeleted = $('.j__delete_party').map(function() {
+      return $(this).parent().parent().attr('id').split('_')[3];
+    });
   });
 }
 
