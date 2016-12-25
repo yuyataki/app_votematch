@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/404' => 'errors#render_404'
+  get '/500' => 'errors#render_500'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

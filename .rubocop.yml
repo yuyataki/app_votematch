@@ -70,3 +70,6 @@ Style/TrailingCommaInLiteral:
 
 AsciiComments:
   Enabled: false
+
+SignalException:
+    EnforcedStyle: only_raise
