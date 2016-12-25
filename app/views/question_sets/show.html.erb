@@ -1,4 +1,6 @@
-<h1 class="question-set-title"><%= @question_set.title %></h1>
+<div class="question-set-title-wrap">
+  <div><h1><%= @question_set.title %></h1></div>
+</div>
 <div class="questions-container">
   <%= form_tag("/question_sets/#{@question_set.id}/yourresult") do %>
     <% @question_set.questions.each do |question| %>

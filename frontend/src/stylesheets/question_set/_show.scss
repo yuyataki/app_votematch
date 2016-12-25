@@ -1,5 +1,16 @@
-.question-set-title {
-  font-size: 3rem;
+.question-set-title-wrap {
+  text-align: center;
+}
+.question-set-title-wrap > div {
+  width: 60%;
+  min-width: 500px;
+  text-align: center;
+  margin: auto;
+}
+.question-set-title-wrap > div > h1 {
+  display: inline-block;
+  text-align: left;
+  font-size: 2.5rem;
   margin-bottom: 20px;
 }
 .questions-container {
@@ -20,7 +31,7 @@
   font-size: 2rem;
 }
 .question-choices {
-  display:inline-block;
+  display: inline-block;
   font-size: 1.6rem;
   background-color: #ffffff;
   width: 100px;
@@ -41,7 +52,7 @@
   border: solid 2px #ed422f;
   cursor: pointer;
 }
-.question-agree-click {
+.question-agree-click, .question-agree:hover {
   margin-right: 30px;
   color: #ffffff;
   background-color: #ed422f;
@@ -53,7 +64,7 @@
   border: solid 2px #1aad59;
   cursor: pointer;
 }
-.question-neutral-click {
+.question-neutral-click, .question-neutral:hover {
   margin-right: 30px;
   color: #ffffff;
   background-color: #1aad59;
@@ -64,7 +75,7 @@
   border: solid 2px #1da0e4;
   cursor: pointer;
 }
-.question-opposition-click {
+.question-opposition-click, .question-opposition:hover {
   color: #ffffff;
   background-color: #1da0e4;
   border: solid 2px #1da0e4;
@@ -80,6 +91,7 @@
   padding: 10px;
   margin: auto;
   margin-top: 30px;
+  transition: 0.15s;
 }
 .questions-container > form > button:hover {
   color: #fff;
