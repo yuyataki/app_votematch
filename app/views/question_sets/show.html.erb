@@ -1,22 +1,24 @@
 <h1 class="question-set-title"><%= @question_set.title %></h1>
-<%= form_tag("/question_sets/#{@question_set.id}/yourresult") do %>
-  <% @question_set.questions.each do |question| %>
-    <div class="question-content clearfix feature_<%= question.id %>" id="<%= question.id %>">
-      <div class="question-title-show">
-        <div class="question-title-style">
-          <%= question.title %>
+<div class="questions-container">
+  <%= form_tag("/question_sets/#{@question_set.id}/yourresult") do %>
+    <% @question_set.questions.each do |question| %>
+      <div class="question-content clearfix feature_<%= question.id %>" id="<%= question.id %>">
+        <div class="question-title-show">
+          <div class="question-title-style">
+            <%= question.title %>
+          </div>
+        </div>
+        <div class="question-agree question-choices j__question_agree">
+          賛成
+        </div>
+        <div class="question-neutral question-choices j__question_neutral">
+          中立
+        </div>
+        <div class="question-opposition question-choices j__question_opposition">
+          反対
         </div>
       </div>
-      <div class="question-agree question-choices j__question_agree">
-        賛成
-      </div>
-      <div class="question-neutral question-choices j__question_neutral">
-        中立
-      </div>
-      <div class="question-opposition question-choices j__question_opposition">
-        反対
-      </div>
-    </div>
+    <% end %>
+    <%= button_tag('結果を見る') %>
   <% end %>
-  <%= button_tag('結果を見る') %>
-<% end %>
+</div>

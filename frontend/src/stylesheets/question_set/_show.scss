@@ -2,6 +2,9 @@
   font-size: 3rem;
   margin-bottom: 20px;
 }
+.questions-container {
+  position: relative;
+}
 .question-content {
   background-color: #ffffff;
   border: solid 2px #ff8433;
@@ -9,6 +12,7 @@
   text-align: center;
   width: 60%;
   min-width: 500px;
+  margin: auto;
   margin-bottom: 20px;
 }
 .question-title-show {
@@ -65,4 +69,20 @@
   background-color: #1da0e4;
   border: solid 2px #1da0e4;
   transition: 0.15s;
+}
+.questions-container > form > button, .questions-container > form > button:hover {
+  display: block;
+  background-color: #fff;
+  border: solid 2px #ff8433;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 250px;
+  padding: 10px;
+  margin: auto;
+  margin-top: 30px;
+}
+.questions-container > form > button:hover {
+  color: #fff;
+  background-color: #ff8433;
+  box-shadow: 2px 2px #d67011;
 }

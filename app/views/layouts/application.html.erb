@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>みんなのぼーとまっち</title>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <title>Yourvotes</title>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= Gon::Base.render_data({}) %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
@@ -11,6 +11,7 @@
     <header>
       <nav>
         <ul class="nav-top">
+          <li><%= link_to 'Yourvotes', root_path %></li>
           <% if user_signed_in? %>
             <li><%= link_to 'プロフィール変更', edit_user_registration_path %></li>
             <li><%= link_to 'マイページ', mypage_path %></li>
@@ -31,5 +32,10 @@
     <div class="container">
       <%= yield %>
     </div>
+    <footer>
+      <div>
+        Copyright &copy; 2016 Yourvotes All Rights Reserved.
+      </div>
+    </footer>
   </body>
 </html>
