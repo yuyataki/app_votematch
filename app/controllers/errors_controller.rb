@@ -7,10 +7,10 @@ class ErrorsController < ActionController::Base
 
   %w(404 500).each do |status_code|
     define_method("render_#{status_code}") do |exception = nil|
-    logger.info "Rendering 404 with exception: #{exception.message}" if exception
+    logger.info "Rendering #{status_code} with exception: #{exception.message}" if exception
     render(
-      file: Rails.root.join('public/404.html'),
-      status: 404, layout: false, content_type: 'text/html'
+      file: Rails.root.join("public/#{status_code}.html"),
+      status: status_code.to_i, layout: false, content_type: 'text/html'
     )
     end
   end
