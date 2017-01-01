@@ -12,6 +12,12 @@ class Question < ApplicationRecord
   validates :title, presence: true
   validate :check_parties_count, :check_question_and_party
 
+  def scores_to_hash
+    scores.map do |score|
+      { score.party_id => score.attributes.slice('agree', 'neutral', 'opposition') }
+    end
+  end
+
   private
 
   def parties_count

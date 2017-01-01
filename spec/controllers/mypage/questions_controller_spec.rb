@@ -79,9 +79,19 @@ RSpec.describe Mypage::QuestionsController, type: :controller do
 
     let(:post_create) { post :create, params: params, session: { user: user } }
 
-    it 'create question belong_to question set and redirect_to mypage_question_set_path 'do
+    it 'question belong_to question_set is created and redirect_to mypage_question_set_path' do
       expect { post_create }.to change { question_set.questions.count }.from(0).to(1)
       is_expected.to redirect_to mypage_question_set_path(question_set)
+    end
+
+    describe 'question_set_history' do
+      let!(:question_set) { create(:question_set, :with_question, :with_history, user: user) }
+
+      it 'question_history is created' do
+        expect { post_create }.to change {
+          question_set.histories.latest.question_histories.count
+        }.by(1)
+      end
     end
   end
 

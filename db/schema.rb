@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161112000000) do
+ActiveRecord::Schema.define(version: 20170101000000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,16 @@ ActiveRecord::Schema.define(version: 20161112000000) do
     t.index ["official_name", "acted_on"], name: "index_parties_on_official_name_and_acted_on", unique: true, using: :btree
   end
 
+  create_table "question_histories", force: :cascade do |t|
+    t.integer  "question_set_history_id", null: false
+    t.string   "title",                   null: false
+    t.jsonb    "scores",                  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["question_set_history_id"], name: "index_question_histories_on_question_set_history_id", using: :btree
+    t.index ["scores"], name: "index_question_histories_on_scores", using: :gin
+  end
+
   create_table "question_scores", force: :cascade do |t|
     t.integer  "question_id",                       null: false
     t.integer  "party_id",                          null: false
@@ -48,6 +58,14 @@ ActiveRecord::Schema.define(version: 20161112000000) do
     t.index ["party_id"], name: "index_question_scores_on_party_id", using: :btree
     t.index ["question_id", "party_id"], name: "index_question_scores_on_question_id_and_party_id", unique: true, using: :btree
     t.index ["question_id"], name: "index_question_scores_on_question_id", using: :btree
+  end
+
+  create_table "question_set_histories", force: :cascade do |t|
+    t.integer  "question_set_id", null: false
+    t.string   "title",           null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["question_set_id"], name: "index_question_set_histories_on_question_set_id", using: :btree
   end
 
   create_table "question_set_relationships", force: :cascade do |t|
@@ -75,6 +93,32 @@ ActiveRecord::Schema.define(version: 20161112000000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_questions_on_user_id", using: :btree
+  end
+
+  create_table "try_histories", force: :cascade do |t|
+    t.integer  "question_set_id", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["question_set_id"], name: "index_try_histories_on_question_set_id", using: :btree
+  end
+
+  create_table "try_history_scores", force: :cascade do |t|
+    t.integer  "try_history_id",             null: false
+    t.integer  "party_id",                   null: false
+    t.integer  "total_score",    default: 0, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["party_id"], name: "index_try_history_scores_on_party_id", using: :btree
+    t.index ["try_history_id"], name: "index_try_history_scores_on_try_history_id", using: :btree
+  end
+
+  create_table "user_try_history_relationships", primary_key: ["user_id", "try_history_id"], force: :cascade do |t|
+    t.integer  "user_id",        null: false
+    t.integer  "try_history_id", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["try_history_id"], name: "index_user_try_history_relationships_on_try_history_id", using: :btree
+    t.index ["user_id"], name: "index_user_try_history_relationships_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
