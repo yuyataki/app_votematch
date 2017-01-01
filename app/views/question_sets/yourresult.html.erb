@@ -5,7 +5,7 @@
       <div class="party-name"><%= result[:party].name  %></div>
       <div class="party-point-wrap">
         <div class="point-bar j__party_<%= result[:party].id %>">
-          <div class="point-num"><%= number_to_percentage(result[:percent], precision: 0) %></div>
+          <div class="point-num"><%= number_to_percentage(result[:percentage], precision: 0) %></div>
         </div>
       </div>
     </div>
@@ -15,7 +15,7 @@
   診断ボートマッチ：<%= link_to @question_set.title, question_set_path(@question_set) %>（<%= @question_set.user_id %>）
 </div>
 <div class="questions-container">
-<h3>あなたの回答</h3>
+  <h3>あなたの回答</h3>
   <% @question_set.questions.each do |question| %>
     <div class="question-content clearfix feature_<%= question.id %>" id="<%= question.id %>">
       <div class="question-title-show">

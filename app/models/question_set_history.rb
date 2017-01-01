@@ -7,7 +7,10 @@ class QuestionSetHistory < ApplicationRecord
     order(:id).last
   end
 
-  def create_try_history(choices, yourresults)
+  def find_or_create_try_history(choices, yourresults)
+    history = try_histories.where(choices: choices).latest
+    return history if history.present?
+
     history = try_histories.new(choices: choices)
     history.try_scores = yourresults.map { |result| TryScore.new(result) }
     history.save!

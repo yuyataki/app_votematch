@@ -9,7 +9,7 @@ class QuestionSetsController < ApplicationController
     @your_results = @question_set.results(params[:choice])
 
     question_set_history = @question_set.histories.latest
-    @try_history = question_set_history.create_try_history(params[:choice], @your_results)
+    @try_history = question_set_history.find_or_create_try_history(params[:choice], @your_results)
 
     gon.parties_points = @your_results.map { |r| [r[:party].id, r[:total], r[:percentage]] }
   end
