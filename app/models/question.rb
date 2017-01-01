@@ -9,6 +9,8 @@ class Question < ApplicationRecord
 
   accepts_nested_attributes_for :scores
 
+  before_update :make_question_set_invisible
+
   validates :title, presence: true
   validate :check_parties_count, :check_question_and_party
 
@@ -34,5 +36,10 @@ class Question < ApplicationRecord
 
   def check_question_and_party
     errors.add(:distinct_parties_count, :not_duplicate) if parties_count != distinct_parties_count
+  end
+
+  def make_question_set_invisible
+    return unless changed?
+    question_sets.each(&:invisible!)
   end
 end

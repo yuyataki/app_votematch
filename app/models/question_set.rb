@@ -36,12 +36,12 @@ class QuestionSet < ApplicationRecord
 
   def create_question_set_history_for_update
     return if questions.blank?
-    return unless changed? || questions.any?(&:changed?)
+    return unless changed?
     create_question_set_history
   end
 
   def create_question_set_history
-    return if !status_changed? && invisible?
+    return if invisible?
 
     question_set_history = histories.new(title: title)
     question_histories = questions.map do |question|

@@ -14,38 +14,5 @@
       </div>
     <% end %>
   </div>
-  <table class="table">
-    <tr>
-      <td>タイトル</td>
-      <td>作成日時</td>
-      <td>質問数</td>
-      <td>状態</td>
-      <td></td>
-      <td class="party-delete">削除</td>
-    </tr>
-    <% @question_sets.each do |question_set| %>
-      <tr>
-        <td><%= link_to question_set.title, mypage_question_set_path(question_set) %></td>
-        <td><%= question_set.created_at.strftime('%Y-%m-%d %H:%M') %></td>
-        <td><%= question_set.questions.count %></td>
-        <td><%= question_set.status_text %></td>
-        <td>
-          <%= form_for([:mypage, question_set]) do |f| %>
-            <%= f.hidden_field :status, value: question_set.toggle_status %>
-            <% if question_set.visible? %>
-              <%= f.submit '非公開にする', class: 'question-edit-visible' %>
-            <% elsif %>
-              <%= f.submit '公開する', class: 'question-edit-invisible' %>
-            <% end %>
-          <% end %>
-        </td>
-        <td class="party-delete" style="text-align:center;">
-          <%= button_to mypage_question_set_path(question_set),
-            method: :delete, class: 'delete-question-set j__delete_question_set' do %>
-            <i class="fa fa-times" aria-hidden="true"></i>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </table>
+  <%= render 'votematches', question_sets: @question_sets %>
 </div>

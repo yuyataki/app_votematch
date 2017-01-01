@@ -5,6 +5,8 @@ class QuestionScore < ApplicationRecord
   belongs_to :question
   belongs_to :party
 
+  before_update :make_question_set_invisible
+
   before_validation :set_zero
   validate :check_total_score
 
@@ -24,5 +26,10 @@ class QuestionScore < ApplicationRecord
     self.agree = 0 if agree.blank?
     self.neutral = 0 if neutral.blank?
     self.opposition = 0 if opposition.blank?
+  end
+
+  def make_question_set_invisible
+    return unless changed?
+    question.question_sets.each(&:invisible!)
   end
 end

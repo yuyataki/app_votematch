@@ -23,6 +23,10 @@ class Mypage::QuestionSetsController < MypageController
     end
   end
 
+  def histories
+    @histories = current_user.question_sets.find(params[:id]).histories.order(:id)
+  end
+
   def update
     question_set = current_user.question_sets.find(params[:id])
     question_set.attributes = question_set_params

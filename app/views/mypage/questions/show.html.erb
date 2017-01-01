@@ -40,6 +40,14 @@
         </tr>
       <% end %>
     </table>
-    <div class="submit"><%= f.submit '更新', class: 'submit-button j__add_question' %></div>
+    <div class="submit">
+      ※更新をすると、この質問が使われているボートマッチがすべて非公開になります。
+      <%= f.submit '更新', class: 'submit-button j__add_question' %>
+    </div>
   <% end %>
+
+  <div>
+    <h3>この質問が使われているボートマッチ一覧</h3>
+    <%= render 'votematches', question_sets: @question.question_sets.decorate %>
+  </div>
 </div>

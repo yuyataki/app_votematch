@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   namespace 'mypage' do
     resources :question_sets, only: %i(create show update destroy)
+    get 'question_sets/:id/histories' => 'question_sets#histories'
     resources :questions do
       resources :question_scores
     end
