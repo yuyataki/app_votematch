@@ -19,8 +19,8 @@ RSpec.describe QuestionSet, type: :model do
 
     let(:expectation) {
       [
-        { party: leberal_democratic, total: 6, percent: 30 },
-        { party: communist, total: 10, percent: 50 },
+        { party: leberal_democratic, total: 6, percentage: 30 },
+        { party: communist, total: 10, percentage: 50 },
       ]
     }
     it { is_expected.to contain_exactly(*expectation) }
