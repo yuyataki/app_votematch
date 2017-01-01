@@ -1,0 +1,28 @@
+h2
+  | 診断結果
+.yourresult-content
+  - @your_results.each do |result|
+    .each-party-yourresult.clearfix
+      .party-name
+        = result[:party].name
+      .party-point-wrap
+        div[class="point-bar j__party_#{result[:party].id}"]
+          .point-num
+            = number_to_percentage(result[:percentage], precision: 0)
+.object-votematch
+  |  診断ボートマッチ：
+  = link_to @question_set.title, question_set_path(@question_set)
+  | （
+  = @question_set.user_id
+  | ）
+.questions-container
+  h3
+    | あなたの回答
+  - @question_set.questions.each do |question|
+    div[class="question-content clearfix feature_#{question.id}" id="#{question.id}"]
+      .question-title-show
+        .question-title-style
+          = question.title
+      = @question_set.selected_choice_tags('agree', @try_history.choices[question.id.to_s])
+      = @question_set.selected_choice_tags('neutral', @try_history.choices[question.id.to_s])
+      = @question_set.selected_choice_tags('opposition', @try_history.choices[question.id.to_s])

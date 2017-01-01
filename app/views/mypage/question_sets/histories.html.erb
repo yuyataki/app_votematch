@@ -1,8 +1,0 @@
-準備中<br>
-<% @histories.each.with_index do |history, i| %>
-  <%= history.title %><br>
-  <% history.question_histories.each do |question_history| %>
-    <%= question_history.title %><br>
-    <%= question_history.scores %><br>
-  <% end %>
-<% end %><br>

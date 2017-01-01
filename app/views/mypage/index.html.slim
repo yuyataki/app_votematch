@@ -1,0 +1,13 @@
+.container
+  = render 'layouts/error'
+  div
+    = form_for([:mypage, @question_set]) do |f|
+      .question-score-list-show
+        .question-title.clearfix
+          .question
+            | タイトル
+          .question-field
+            = f.text_field :title, class: 'question-create-title'
+          .submit.votematch-submit
+            = f.submit 'ボートマッチを作成する', class: 'submit-button'
+  = render 'votematches', question_sets: @question_sets

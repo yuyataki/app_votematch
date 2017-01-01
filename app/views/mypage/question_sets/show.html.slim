@@ -1,0 +1,94 @@
+.container.create-question
+  = render 'layouts/error'
+  .show-title.clearfix.j__show-title
+    .question-set-title-text-show
+      | タイトル：
+      = link_to @question_set.title, question_set_path(@question_set)
+    .edit-title-button
+      = button_tag '編集', class: 'submit-button j__edit-submit-button'
+  .edit-title.clearfix.j__edit-title[style="display: none;"]
+    = form_for([:mypage, @question_set]) do |f|
+      = f.hidden_field :question_set, value: @question_set.id
+      .question-set-title-text
+        | タイトル：
+        = f.text_field :title, class: 'question-create-title'
+      .edit-title-button
+        = f.submit '保存', class: 'submit-button'
+  = form_for([:mypage, @question]) do |f|
+    = f.hidden_field :question_set, value: @question_set.id
+    table.table
+      tr
+        .question-score-list-show
+          .question-title.clearfix
+            .question
+              | 質問
+            .question-field
+              = f.text_field :title, value: session[:question_title], class: 'question-create-title'
+      tr
+        th
+          | 政党
+        th
+          | 賛成度
+        th
+          | 中立度
+        th
+          | 反対度
+        - if @question_set.saved_questions.blank?
+          th.party-delete
+            | 削除
+        th.point-alert
+
+      - @parties.each do |party|
+        = f.fields_for :scores do |qs_f|
+          tr[id="j__party_#{party.id}"]
+            td
+              = qs_f.select :party_id, @parties.map { |party| [party.name, party.id] }, selected: party.id
+            td
+              = qs_f.select :agree, QuestionScore::SCORES, { include_blank: true, selected: session[:scores_attributes].try(:[], party.id.to_s).try(:[], 'agree') }, class: "j__point_#{party.id}"
+            td
+              = qs_f.select :neutral, QuestionScore::SCORES, { include_blank: true, selected: session[:scores_attributes].try(:[], party.id.to_s).try(:[], 'neutral') }, class: "j__point_#{party.id}"
+            td
+              = qs_f.select :opposition, QuestionScore::SCORES, { include_blank: true, selected:  session[:scores_attributes].try(:[], party.id.to_s).try(:[], 'opposition') }, class: "j__point_#{party.id}"
+            - if @question_set.saved_questions.blank?
+              td.party-delete[style="text-align:center;"]
+                i.fa.fa-times.j__delete_party[aria-hidden="true"]
+            td
+              span[class="j__alert" id="j__alert_#{party.id}"]
+    .submit
+      = f.submit '追加', class: 'submit-button j__add_question', disabled: true
+  .question-score-list
+    - @question_set.saved_questions.each do |question|
+      .question-title.j__show_question_score
+        i.fa.fa-caret-square-o-down.dropdown-icon.j__accordion_change[aria-hidden="true"]
+        = question.title
+      .accordion
+        table.table
+          tr
+            td
+              | 政党名
+            td
+              | 賛成度
+            td
+              | 中立度
+            td
+              | 反対度
+          - question.scores.each do |score|
+            tr
+              td
+                = score.party.name
+              td
+                = score.agree
+              td
+                = score.neutral
+              td
+                = score.opposition
+          tr
+            td.edit-row[colspan="4"]
+              = link_to '編集', mypage_question_path(question), class: 'question-edit'
+  .question-set-show-bottom
+    = form_for([:mypage, @question_set]) do |f|
+      = f.hidden_field :status, value: @question_set.toggle_status
+      - if @question_set.visible?
+        = f.submit '非公開にする', class: 'question-set-show-edit-visible'
+      - else
+        = f.submit '公開する', class: 'question-set-show-edit-invisible'

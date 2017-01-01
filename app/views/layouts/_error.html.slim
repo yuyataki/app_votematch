@@ -1,0 +1,6 @@
+- if session[:errors].present?
+  .errors-wrap
+    .errors
+      - session[:errors].each do |error_message|
+        .validation_error
+          = error_message

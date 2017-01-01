@@ -1,0 +1,14 @@
+.container
+  table.table
+    tr
+      td.question-score
+        | タイトル
+      td.question-score
+        | ユーザー
+      td
+    - @favorite_sets.each do |favorite_set|
+      tr
+        td
+          = favorite_set.title
+        td
+          = favorite_set.user_id

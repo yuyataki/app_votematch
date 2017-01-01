@@ -1,9 +1,0 @@
-<% if session[:errors].present? %>
-  <div class="errors-wrap">
-    <div class="errors">
-      <% session[:errors].each do |error_message|  %>
-        <div class="validation_error"><%= error_message %></div>
-      <% end %>
-    </div>
-  </div>
-<% end %>

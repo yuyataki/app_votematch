@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    title
+      | Yourvotes
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = Gon::Base.render_data({})
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body.container-fluid
+    header
+      nav
+        ul.nav-top
+          li
+            = link_to 'Yourvotes', root_path
+          - if user_signed_in?
+            li
+              = link_to 'プロフィール変更', edit_user_registration_path
+            li
+              = link_to 'マイページ', mypage_path
+            li
+              = link_to 'ログアウト', destroy_user_session_path, method: :delete
+          - else
+            li
+              = link_to 'サインアップ', new_user_registration_path
+            li
+              = link_to 'ログイン', new_user_session_path
+    - if notice.present?
+      p.notice
+        = notice
+    - if alert.present?
+      p.alert
+        = alert
+    .container
+      = yield
+    footer
+      div
+        |  Copyright © 2016 Yourvotes All Rights Reserved. 

@@ -1,0 +1,43 @@
+.container
+  = render 'layouts/error'
+  = form_for([:mypage, @question]) do |f|
+    table.table
+      tr
+        .question-score-list-show
+          .question-title.clearfix
+            .question
+              | 質問
+            .question-field
+              = f.text_field :title, class: 'question-create-title'
+      tr
+        th
+          | 政党
+        th
+          | 賛成度
+        th
+          | 中立度
+        th
+          | 反対度
+        th.point-alert
+
+      = f.fields_for :scores, @question.scores.eager_load(:party) do |qs_f|
+        - party = qs_f.object.party
+        tr[id="j__party_#{party.id}"]
+        td
+          = party.name
+          = qs_f.hidden_field :party_id, value: party.id
+        td
+          = qs_f.select :agree, QuestionScore::SCORES, { include_blank: true }, class: "j__point_#{party.id}"
+        td
+          = qs_f.select :neutral, QuestionScore::SCORES, { include_blank: true }, class: "j__point_#{party.id}"
+        td
+          = qs_f.select :opposition, QuestionScore::SCORES, { include_blank: true }, class: "j__point_#{party.id}"
+        td
+          span[class="j__alert" id="j__alert_#{party.id}"]
+    .submit
+      |  ※更新をすると、この質問が使われているボートマッチがすべて非公開になります。
+      = f.submit '更新', class: 'submit-button j__add_question'
+    div
+    h3
+      | この質問が使われているボートマッチ一覧
+    = render 'votematches', question_sets: @question.question_sets.decorate
