@@ -2,6 +2,11 @@
   border: solid 2px #ff8433;
   border-radius: 5px;
 }
+.questions-container > h3 {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
 .each-party-yourresult {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -29,4 +34,9 @@
 }
 .point-num {
   margin-right: 5px;
+}
+.object-votematch {
+  text-align: right;
+  font-size: 0.9rem;
+  margin-top: 5px;
 }

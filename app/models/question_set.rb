@@ -2,7 +2,6 @@ class QuestionSet < ApplicationRecord
   belongs_to :user
   has_many :question_set_relationships
   has_many :questions, through: :question_set_relationships
-  has_many :try_histories
   has_many :histories, class_name: 'QuestionSetHistory'
 
   enum status: { invisible: 0, visible: 1 }
@@ -26,13 +25,15 @@ class QuestionSet < ApplicationRecord
       QuestionScore.of_question(questions)
     ).map do |party|
       total = party.scores.reduce(0) { |sum, s| sum + s.send(choice_params[s.question_id.to_s]) }
-      { party: party, total: total, percent: 100 * total / (10 * questions.count) }
+      { party: party, total: total, percentage: 100 * total / (10 * questions.count) }
     end
   end
 
   def saved_questions
     questions.eager_load(scores: :party).select(&:persisted?)
   end
+
+  private
 
   def create_question_set_history_for_update
     return if questions.blank?

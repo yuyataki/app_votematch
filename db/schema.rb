@@ -96,20 +96,22 @@ ActiveRecord::Schema.define(version: 20170101000000) do
   end
 
   create_table "try_histories", force: :cascade do |t|
-    t.integer  "question_set_id", null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["question_set_id"], name: "index_try_histories_on_question_set_id", using: :btree
+    t.integer  "question_set_history_id", null: false
+    t.jsonb    "choices",                 null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["question_set_history_id"], name: "index_try_histories_on_question_set_history_id", using: :btree
   end
 
-  create_table "try_history_scores", force: :cascade do |t|
+  create_table "try_scores", force: :cascade do |t|
     t.integer  "try_history_id",             null: false
     t.integer  "party_id",                   null: false
-    t.integer  "total_score",    default: 0, null: false
+    t.integer  "total",          default: 0, null: false
+    t.integer  "percentage",     default: 0, null: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.index ["party_id"], name: "index_try_history_scores_on_party_id", using: :btree
-    t.index ["try_history_id"], name: "index_try_history_scores_on_try_history_id", using: :btree
+    t.index ["party_id"], name: "index_try_scores_on_party_id", using: :btree
+    t.index ["try_history_id"], name: "index_try_scores_on_try_history_id", using: :btree
   end
 
   create_table "user_try_history_relationships", primary_key: ["user_id", "try_history_id"], force: :cascade do |t|

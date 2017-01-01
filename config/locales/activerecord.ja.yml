@@ -18,5 +18,8 @@ ja:
         distinct_parties_count: '政党'
       question_score:
         total_score: 'ポイントの合計'
+        agree: '賛成'
+        neutral: '中立'
+        opposition: '反対'
       scores:
         total_score: 'ポイントの合計'
