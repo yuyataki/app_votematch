@@ -3,12 +3,10 @@ require 'rails_helper'
 class TestController < ApplicationController
   def index
     raise StandardError
-    render text: "test"
   end
 
   def show
     raise ActiveRecord::RecordNotFound
-    render text: "test"
   end
 end
 

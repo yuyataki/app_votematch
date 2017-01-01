@@ -51,7 +51,6 @@ RSpec.feature 'Create QuestionSet', type: :feature do
     end
 
     expect(page).to have_button('追加', disabled: true)
-
   end
 
   scenario 'Create QuestionSet successfully but only one party and less than 10 points w/o js' do
