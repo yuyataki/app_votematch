@@ -5,14 +5,15 @@
 .questions-container
   = form_tag("/question_sets/#{@question_set.id}/yourresult") do
     - @question_set.questions.each do |question|
-      div[class="question-content clearfix feature_#{question.id}" id="#{question.id}"]
+      div[class="question-content clearfix j__question_content" id="#{question.id}"]
         .question-title-show
           .question-title-style
             = question.title
-        .question-agree.question-choices.j__question_agree
+        .question-agree.question-choices.j__question_agree.j__question_position
           |  賛成
-        .question-neutral.question-choices.j__question_neutral
+        .question-neutral.question-choices.j__question_neutral.j__question_position
           |  中立
-        .question-opposition.question-choices.j__question_opposition
+        .question-opposition.question-choices.j__question_opposition.j__question_position
           |  反対
-    = button_tag('結果を見る')
+    = render 'layouts/error'
+    = button_tag '結果を見る', class: 'j__show_result', disabled: true

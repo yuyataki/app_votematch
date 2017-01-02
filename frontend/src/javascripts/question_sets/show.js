@@ -28,10 +28,20 @@ function addValue(element, value) {
 
   $(`#question_${question_id}`).remove();
   $('<input>', {
-    type: 'hidden', id: `question_${question_id}`, name: `choice[${question_id}]`, value: value
+    type: 'hidden', class: 'j__hidden_position',
+    id: `question_${question_id}`, name: `choice[${question_id}]`, value: value
   }).appendTo(element);
+}
+
+function toggleDisabled() {
+  $('.j__question_position').click(function() {
+    if($('.j__hidden_position').length === $('.j__question_content').length) {
+      $('.j__show_result').prop('disabled', false);
+    }
+  });
 }
 
 $(() => {
   clickQuestionAgree();
+  toggleDisabled();
 });

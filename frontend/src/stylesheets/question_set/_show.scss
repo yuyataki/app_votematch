@@ -90,11 +90,21 @@
   width: 250px;
   padding: 10px;
   margin: auto;
-  margin-top: 30px;
+  margin-top: 20px;
   transition: 0.15s;
 }
 .questions-container > form > button:hover {
   color: #fff;
   background-color: #ff8433;
   box-shadow: 2px 2px #d67011;
+}
+.questions-container > form > button[disabled], .questions-container > form > button:hover[disabled] {
+  background-color: #f2f2f2;
+  border: solid 2px #bdbdbd;
+  cursor: default;
+}
+.questions-container > form > button:hover[disabled] {
+  color: #000;
+  background-color: #f2f2f2;
+  box-shadow: none;
 }
