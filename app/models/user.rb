@@ -10,4 +10,6 @@ class User < ApplicationRecord
   has_many :try_histories, through: :user_try_history_relationships
   has_many :favorites
   has_many :favorite_sets, through: :favorites, source: :question_set
+
+  validates :password, length: { in: Devise.password_length }
 end

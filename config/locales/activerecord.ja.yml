@@ -10,6 +10,11 @@ ja:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
     attributes:
+      user:
+        email: 'メールアドレス'
+        password: 'パスワード'
+        password_confirmation: 'パスワード（再入力）'
+        remember_me: '次回から自動的にログインする'
       question_set:
         title: 'タイトル'
       question:

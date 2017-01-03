@@ -5,7 +5,7 @@
 .questions-container
   = form_tag("/question_sets/#{@question_set.id}/yourresult") do
     - @question_set.questions.each do |question|
-      div[class="question-content clearfix j__question_content" id="#{question.id}"]
+      div[class="question-content clearfix j__question_content feature_#{question.id}" id="#{question.id}"]
         .question-title-show
           .question-title-style
             = question.title
