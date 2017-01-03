@@ -1,0 +1,55 @@
+h1 {
+  text-align: center;
+  & img {
+    width: 90%;
+    max-width: 444px;
+  }
+}
+.tabmenu-and-sets-wrap {
+  width: 80%;
+  min-width: 350px;
+  margin: auto;
+  margin-top: 40px;
+}
+.latest-question-sets, .famous-sets {
+  background-color: #fff;
+  border: solid 1px #6495ed;
+  margin: auto;
+  clear: both;
+}
+.tabmenu {
+  float: left;
+  border: solid 1px #6495ed;
+  border-bottom: none;
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  margin: 0 0 0 5px;
+  letter-spacing: 3px;
+  text-align: center;
+}
+.tabmenu:hover {
+  cursor: pointer;
+}
+.tabmenu.not-selected {
+}
+.tabmenu.selected {
+  background-color: #6495ed;
+  color: #fff;
+}
+table.top-table {
+  width: 100%;
+}
+table.top-table > tbody > tr {
+  height: 30px;
+  line-height: 30px;
+}
+table.top-table > tbody > tr {
+  & th, td {
+    padding: 0 10px 0;
+  }
+}
+.famous-sets {
+  display: none;
+  padding: 10px;
+}

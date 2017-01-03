@@ -10,6 +10,8 @@ class QuestionSet < ApplicationRecord
 
   validates :title, presence: true
 
+  scope :have_questions, -> { left_joins(:questions).merge(Question.where.not(id: nil)).distinct }
+
   def parties
     questions.find(&:persisted?).try(:parties) || Party.active(Time.zone.now)
   end
