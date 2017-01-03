@@ -3,10 +3,6 @@ class QuestionSetHistory < ApplicationRecord
   has_many :question_histories
   has_many :try_histories
 
-  def self.latest
-    order(:id).last
-  end
-
   def find_or_create_try_history(choices, yourresults)
     history = try_histories.where(choices: choices).latest
     return history if history.present?
