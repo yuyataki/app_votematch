@@ -2,7 +2,11 @@ doctype html
 html
   head
     title
-      | Yourvotes
+      | みんなでつくるぼーとまっち - Yourvotes
+    meta[property="og:title" content="みんなでつくるぼーとまっち"]
+    meta[property="og:url" content="https://yourvotes.herokuapp.com/"]
+    meta[property="og:image" content="#{image_url('logo-yourvotes.png')}"]
+    meta[property="og:description" content="ひとりひとりが"]
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = Gon::Base.render_data({})
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
