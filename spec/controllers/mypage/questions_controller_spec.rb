@@ -68,7 +68,6 @@ RSpec.describe Mypage::QuestionsController, type: :controller do
   end
 
   describe 'POST #create' do
-    let(:question_set) { create(:question_set, user: user) }
     let(:question_params) { attributes_for(:question, user: user, question_set: question_set) }
     let(:score_params) {
       %i(leberal_democratic communist).map.with_index do |party, num|
@@ -79,18 +78,28 @@ RSpec.describe Mypage::QuestionsController, type: :controller do
 
     let(:post_create) { post :create, params: params, session: { user: user } }
 
-    it 'question belong_to question_set is created and redirect_to mypage_question_set_path' do
-      expect { post_create }.to change { question_set.questions.count }.from(0).to(1)
-      is_expected.to redirect_to mypage_question_set_path(question_set)
+    context 'when question_set has no hitory' do
+      let(:question_set) { create(:question_set, user: user) }
+
+      it 'question belong_to question_set is created and redirect_to mypage_question_set_path' do
+        expect { post_create }.to change { question_set.questions.count }.from(0).to(1)
+        is_expected.to redirect_to mypage_question_set_path(question_set)
+      end
     end
 
-    describe 'question_set_history' do
-      let!(:question_set) { create(:question_set, :with_question, :with_history, user: user) }
+    context 'when question_set has histories' do
+      let!(:question_set) {
+        create(:question_set, :with_question, :with_history, :visible, user: user)
+      }
 
-      it 'question_history is created' do
-        expect { post_create }.to change {
+      it 'question_history is not created' do
+        expect { post_create }.not_to change {
           question_set.histories.latest.question_histories.count
-        }.by(1)
+        }
+      end
+
+      it 'question_set status is invisible' do
+        expect { post_create }.to change { question_set.reload.status }.from('visible').to('invisible')
       end
     end
   end

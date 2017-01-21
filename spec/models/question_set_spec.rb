@@ -36,42 +36,6 @@ RSpec.describe QuestionSet, type: :model do
       let(:question_set) { create(:question_set, :with_question) }
       it { expect { question_set.visible! }.to change { question_set.histories.count }.by(1) }
     end
-
-    context 'when visible' do
-      context 'when title is changed' do
-        let(:question_set) { create(:question_set, :with_question) }
-        before { question_set.visible! }
-
-        let(:title) { 'title changed' }
-        let(:edit_title) { question_set.update!(title: title) }
-
-        it 'question_set_history is created' do
-          expect { edit_title }.to change { question_set.histories.count }.by(1)
-        end
-
-        it 'title of question_set_history is changed' do
-          expect { edit_title }.to change {
-            question_set.histories.latest.title
-          }.from('20XX年衆議院選挙!あなたの選択は?!').to(title)
-        end
-      end
-
-      context 'when title is not changed' do
-        let(:question_set) { create(:question_set, :with_question) }
-        before { question_set.visible! }
-
-        let(:title) { '20XX年衆議院選挙!あなたの選択は?!' }
-        let(:edit_title) { question_set.update!(title: title) }
-
-        it 'question_set_history is not created' do
-          expect { edit_title }.not_to change { question_set.histories.count }
-        end
-      end
-
-      context 'when question is added' do
-        # This case is described in mypage/questions_controller_spec
-      end
-    end
   end
 
   describe '#be_invisible' do
