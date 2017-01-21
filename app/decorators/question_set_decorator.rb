@@ -1,5 +1,6 @@
 class QuestionSetDecorator < Draper::Decorator
   delegate_all
+  decorates_association :user
 
   def toggle_status
     visible? ? 'invisible' : 'visible'
