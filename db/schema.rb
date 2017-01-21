@@ -114,9 +114,9 @@ ActiveRecord::Schema.define(version: 20170120000000) do
     t.index ["try_history_id"], name: "index_try_scores_on_try_history_id", using: :btree
   end
 
-  create_table "user_try_history_relationships", primary_key: ["user_id", "try_history_id"], force: :cascade do |t|
+  create_table "user_try_history_relationships", force: :cascade do |t|
     t.integer  "user_id",        null: false
-    t.integer  "try_history_id", null: false
+    t.integer  "try_history_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["try_history_id"], name: "index_user_try_history_relationships_on_try_history_id", using: :btree
