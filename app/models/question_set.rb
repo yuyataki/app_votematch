@@ -6,6 +6,7 @@ class QuestionSet < ApplicationRecord
 
   enum status: { invisible: 0, visible: 1 }
 
+  before_update :be_invisible
   after_update :create_question_set_history_for_update
 
   validates :title, presence: true
@@ -37,6 +38,11 @@ class QuestionSet < ApplicationRecord
   end
 
   private
+
+  def be_invisible
+    return if status_changed?
+    self.status = :invisible if visible?
+  end
 
   def create_question_set_history_for_update
     return if questions.blank?

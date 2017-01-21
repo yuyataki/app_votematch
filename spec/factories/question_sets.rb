@@ -6,6 +6,9 @@ FactoryGirl.define do
     trait :visible do
       status :visible
     end
+    trait :invisible do
+      status :invisible
+    end
 
     trait :with_question do
       after(:build) do |question_set|

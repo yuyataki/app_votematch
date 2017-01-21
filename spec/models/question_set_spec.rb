@@ -73,4 +73,33 @@ RSpec.describe QuestionSet, type: :model do
       end
     end
   end
+
+  describe '#be_invisible' do
+    context 'add question' do
+      let(:question_set) { create(:question_set, status, :with_question) }
+      let(:new_question) { create(:question) }
+
+      let(:add_question) {
+        question_set.questions << new_question
+        question_set.save
+      }
+
+      context 'when question_set is visible' do
+        let(:status) { :visible }
+        it 'change status to invisible' do
+          expect { add_question }.to change { question_set.status }.from('visible').to('invisible')
+        end
+      end
+
+      context 'when question_set is invisible' do
+        let(:status) { :invisible }
+        it { expect { add_question }.not_to change { question_set.status } }
+      end
+
+      context 'when status changed' do
+        let(:status) { :invisible }
+        it { expect { question_set.visible! }.to change { question_set.status }.to('visible') }
+      end
+    end
+  end
 end
