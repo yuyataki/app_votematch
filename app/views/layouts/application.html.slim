@@ -3,10 +3,14 @@ html
   head
     title
       | みんなでつくるぼーとまっち - Yourvotes
-    meta[property="og:title" content="みんなでつくるぼーとまっち"]
-    meta[property="og:url" content="https://yourvotes.herokuapp.com/"]
-    meta[property="og:image" content="#{image_url('logo-yourvotes.png')}"]
-    meta[property="og:description" content="ひとりひとりが"]
+    meta[name='keywords' content='政策,政党,選挙,ボートマッチ']
+    meta[name='description' content='誰もがぼーとまっちを作れる政策プラットフォームです。これまで答えるだけだったぼーとまっちが誰でも作成可能に！']
+    meta[property='og:site_name' content='みんなでつくるぼーとまっち - Yourvotes']
+    meta[property='og:type' content='website']
+    meta[property='og:title' content='みんなでつくるぼーとまっち']
+    meta[property='og:url' content='https://yourvotes.jp/']
+    meta[property='og:image' content='https://yourvotes.jp/og-yourvotes.png']
+    meta[property='og:description' content='誰もがぼーとまっちを作れる政策プラットフォームです。これまで答えるだけだったぼーとまっちが誰でも作成可能に！']
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = Gon::Base.render_data({})
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
