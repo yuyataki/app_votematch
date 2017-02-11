@@ -13,6 +13,9 @@ env:
   global:
     - secure: 'JQ/G+5cP+qvguX8FcV2WaffKavScN860iJzzxdNucuTEWDH0IqzuaK/ifFtYC2auKIQfG0HJTFaQjeuvKz9slYzmneePFndWuvxdG08D8glo+ctdZiKsjtlqHgXQJ5JAcLxLcvqkJYNGZTL0zsRCmeD9wmh9eBqW2xJV1iYJvlLHenkqpJiw2fIHWLiIJHh7niZiDIu2Lpul8NKEKtN49VLu08+g5fiR6pFNioXU68yBtIMNBbXhoCP2yr9z3W1fZyDXhK0Q0k1DLiFrnA+/JiLrC8UgsIJhWz24cZJZTUgW9odkYyrP2VfVFETz1cUAtcLeITgsk+NtIOvcsyw3tsedx14hrOjm9Mfs9GAq30qIJsBoRpE6htVa+spFuyWJyFE3rzh+7HUE2CYVETyIuEL6yaokzkXlXvcDFBBla83ObDE1geQUfHEcO3OzMSxjuGX/GCn7jave01zpg/rmFSqlnNoyZYMoTVphq+fBsMu7mr585oGj8vYqMA7J70r/fSWOM3a7qyXri26YbrFzbly2O3+bzZWCKjQ2gD7dreHS0VJgjic8eswkxLjNZofAmv5pEqu1FFYPO/7CTO/g/fYmojyoWiWoSwaqL4Fgjcb5NYb29V8mHTQJhVqoyCV8+AVub9aYf5ZSb9rDJvwivtwFlhDGCc//JUWPrVNT8OM='
     - secure: 'zaZ/DaFV/FPhbM+hw8SkFxArxbVo6vm8Qyp1nMWq2RNKv2L2eirWOpnPKWC5Q/3BA0VbYqgeKZ1kN/IYyHQjTIVVexwufrgoNqLvN9FpdQoEVUH5+UB6rTn1GaQrw6fmevLS2EDk/bz6weck9zRue0Q1Se3qjp4gig+GUC/O3n+KyLyeeK4WxB5g5APbogZVaKFhmhKVH5j81gRtXl5/+qVSTg3lsPXV5asGxvDg8tJqoWFL5nG7+L7SsSvu+mz/BoG5hhr21ra9SPJwKw0VmxVfNERir4uMroIZvrOyLn9FL71h9z3vzM6n4EGfPVGdk61WWe7AQKiSP5AS87WADrZtJJwZqdGke7W88H3gfj5BbM9eIZzy/jh5CrmlSKE7qRTYNMdR3jZOy2RDSC2ggJ2i43hPiIhSaaM7PyHEQHJMXCCVx+Y1Cnd/5RAE/hIKr+mOlTRh6t2SMggczsm+dzi6cPFL3tvwvdG9j3MVt2z+hZoCI48Yzlh6WC0N7wDtsgpuS24Ogc1FMEpkdjF4zXzNYdNfYXcR6H0V/1sS568fJGnLzRtDsCwCOJaj0JFwH96M3ndPwOQJJenaJK9pCDEnGfUe0CHDwk12ErRMInKDpptzfb7O0NscMrvGdaeB1ffd+AoEhruN+Q84VmufPfVg5O64UjFgIwddpBGdpqI='
+install:
+  - . $HOME/.nvm/nvm.sh
+  - cd frontend && nvm install stable && nvm use stable && npm install -g npm@4.0.5 && npm install && cd ../
 before_script:
   - psql -U postgres -c 'create database "travis-db-test";'
   - psql -U postgres travis-db-test -c 'create extension "uuid-ossp";'
@@ -21,8 +24,10 @@ before_script:
   - tar -xvf $PWD/travis-phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2 -C $PWD/travis-phantomjs
   - export PATH=$PWD/travis-phantomjs/phantomjs-2.1.1-linux-x86_64/bin:$PATH
   - cp config/database.travis.yml config/database.yml
-  - bundle exec rake db:create
-  - bundle exec rake db:migrate
+  - bundle install --without development --deployment
+  - bin/rake db:create
+  - bin/rake db:migrate
+  - cd frontend && npm run release && cd ../
 script:
   - bundle exec rspec spec
 after_success:
