@@ -7,6 +7,11 @@
   "name": "app_votematch",
   "version": "0.0.0",
   "description": "app_votematch",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yuyasat/app_votematch.git"
+  },
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-core": "^6.20.0",
