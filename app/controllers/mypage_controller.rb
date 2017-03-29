@@ -8,8 +8,7 @@ class MypageController < ApplicationController
     @question_sets = current_user.question_sets.decorate
   end
 
-  def show
-  end
+  def show; end
 
   private
 

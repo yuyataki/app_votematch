@@ -22,9 +22,9 @@ class QuestionSetsController < ApplicationController
   end
 
   def redirect_to_show_page
-    if params[:choice].blank? || params[:choice].to_unsafe_h.size != @question_set.questions.size
-      flash[:error] = '選択してください'
-      redirect_back(fallback_location: question_set_path(@question_set))
-    end
+    return unless params[:choice].blank? ||
+                  params[:choice].to_unsafe_h.size != @question_set.questions.size
+    flash[:error] = '選択してください'
+    redirect_back(fallback_location: question_set_path(@question_set))
   end
 end

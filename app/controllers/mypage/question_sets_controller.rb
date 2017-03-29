@@ -43,6 +43,6 @@ class Mypage::QuestionSetsController < MypageController
   private
 
   def question_set_params
-    params.require(:question_set).permit(*%i(user title status))
+    params.require(:question_set).permit(:user, :title, :status)
   end
 end
