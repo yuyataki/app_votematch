@@ -56,6 +56,8 @@
     ended_on: '2014-9-22' },
   { name: 'おおさか維新', official_name: 'おおさか維新の会', action: :found, acted_on: '2015-11-2',
     ended_on: '2016-8-23' },
+  { name: '希望の党', official_name: '希望の党', action: :found, acted_on: '2017-9-25' },
+  { name: '立憲民主党', official_name: '立憲民主党', action: :found, acted_on: '2017-10-3' },
 ].each { |party| Party.find_or_create_by(party) }
 
 founded = Party.found
